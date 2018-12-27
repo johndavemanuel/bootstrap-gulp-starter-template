@@ -1,0 +1,44 @@
+{
+  "name": "front-end-template",
+  "version": "1.0.0",
+  "description": "a bootstrap 4 boiler plate with sass, concatenation, minification, autoprefixer, sourcemaps, browser-sync, git and gulp task runner",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "author": "johndavemanuel",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-csscomb": "^3.0.8",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-data": "^1.3.1",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-htmllint": "0.0.16",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-nunjucks": "^4.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "node-bourbon": "^4.2.8"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {},
+  "keywords": [
+    "gulp",
+    "template",
+    "front-end"
+  ]
+}
