@@ -25,6 +25,8 @@
     "gulp-htmllint": "0.0.16",
     "gulp-imagemin": "^5.0.3",
     "gulp-nunjucks": "^4.0.0",
+    "gulp-nunjucks-render": "^2.2.2",
+    "gulp-pretty-html": "^2.0.9",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",

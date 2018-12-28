@@ -1,0 +1,5 @@
+ <ul class="nav-menu" id="primary-menu">
+  {% for item in navItems %}
+    <li class="menu-item menu-item-{{ item.menu_item }}{% if page_title == item.menu_item %} menu-item-current{% endif %}"><a href="../{{ item.menu_item | lower | replace(" ", "") }}/">{{ item.menu_item }}</a></li>
+  {% endfor %}
+</ul>
