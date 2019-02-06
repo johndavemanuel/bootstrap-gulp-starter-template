@@ -1,16 +1,5 @@
 # BOOTSTRAP4 GULP STARTER TEMPLATE
 
-## Beginners - How to use this template
-
-1. [Download](https://github.com/wowthemesnet/template-pintereso-bootstrap-html/archive/master.zip)
-2. Extract and copy "docs" folder, this is the only one you'll need.
-
-That's it! Now you can get started:
-- open index.html in your browser to visit the homepage
-- assets/css/theme.css - add/edit your custom CSS
-- assets/js/theme.js - add/edit your custom JS
-- assets/img - your images
-
 ## Developers - How to use this template
 
 The template is built with Sass and Gulp build system with these features:
@@ -18,31 +7,25 @@ The template is built with Sass and Gulp build system with these features:
 -	Handlebars HTML templates with Panini– Panini is a super simple flat file generator for use with Gulp. It compiles a series of HTML pages using a common layout. These pages can also include HTML partials, external Handlebars helpers, or external data as JSON.
 -	Sass compilation, prefixing with Autoprefixer, and JavaScript concatenation
 -	Built-in BrowserSync server - Will automatically reload your page when files are changed. It also live-injects CSS changes when you save a Sass file. This task runs continuously. Defaults to localhost. 
--	For production builds - CSS compression, JavaScript compression, Image compression
+-	For production builds - CSS compression, JavaScript compression, Image compression and more..
 
 
 ### Requirements
 
 To use this template, your computer needs:
 
--	Ruby https://rubyinstaller.org/ 
 -	Node.js (0.12 or greater) Node.js is used to run the build processes. https://nodejs.org/en/download/ 
 	Test: run ` node -v ` in the terminal
 -	Npm (Node comes with npm installed so you should have a version of npm.) Used to manage development dependencies.
 	Test: run ` npm -v`  in the terminal
--	Sass http://sass-lang.com/install 
-	Test: run ` sass -v`  in the terminal
 -	Gulp – task runner
 	`npm install -g gulp`
 	Test: run `gulp -v ` in the terminal
 
-** If you have all of the above installed, open a new terminal window or clear your current window and continue to template installation steps below. 
-
-
 ### Installing:
 
-- Clone this repo: `git clone https://github.com/wowthemesnet/template-pintereso-bootstrap-html.git`
-- Navigate into the repo directory: `cd template-pintereso-bootstrap-html`
+- Clone this repo: `git clone https://github.com/johndavemanuel/bootstrap4-gulp-starter-template.git`
+- Navigate into the repo directory: `cd bootstrap4-gulp-starter-template`
 - Install all node packages: `npm install`
 - Run `gulp`
 - Your site is now viewable at this URL: http://localhost:3000
@@ -61,7 +44,8 @@ To use this template, your computer needs:
 - `src/partials/` Handlebars partials.
 - `gulpfile.js` Task definitions.
 - `package.json` Handles the front-end dependencies.
-
+- `.htmllintrc` Handles the HTML lint rules.
+- `.sass-lint.yml` Handles the SASS lint rules.
 
 ### SRC Folder Structure:
 
