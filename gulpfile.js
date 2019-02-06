@@ -24,6 +24,7 @@ var gulp = require('gulp'),
     prettyHtml = require('gulp-pretty-html'),
     sassLint = require('gulp-sass-lint'),
     htmllint = require('gulp-htmllint'),
+    htmlreplace = require('gulp-html-replace'),
     autoprefixer = require('gulp-autoprefixer');
 
 // ------------ DEVELOPMENT TASKS -------------
@@ -86,9 +87,9 @@ gulp.task('resetPages', (done) => {
 });
 
 
-
+// SASS LINT
 gulp.task('sassLint', function() {
-    return gulp.src('src/assets/custom/scss/responsive.scss')
+    return gulp.src('src/assets/custom/scss/*.scss')
         .pipe(sassLint())
         .pipe(sassLint.format())
         .pipe(sassLint.failOnError())
@@ -97,7 +98,7 @@ gulp.task('sassLint', function() {
 // HTML LINTER
 gulp.task('htmlLint', function() {
     console.log('---------------HTML LINTING---------------');
-    return gulp.src("dist/index.html")
+    return gulp.src("dist/*.html")
         .pipe(htmllint({}, htmllintReporter));
 });
 
@@ -121,7 +122,7 @@ gulp.task('watch', ['sass'], function() {
     gulp.watch(['src/**/*.html'], ['resetPages', 'compile-html', browserSync.reload]);
     gulp.watch(['src/assets/scss/**/*'], ['sass', browserSync.reload]);
     gulp.watch(['src/assets/js/*.js'], ['compile-js', browserSync.reload]);
-    gulp.watch(['src/assets/img/**/*'], ['images']);
+    gulp.watch(['src/assets/img/**/*'], ['images', browserSync.reload]);
 });
 
 
@@ -152,8 +153,7 @@ gulp.task('jsVendor', function() {
     console.log('CONCATENATING JAVASCRIPT FILES INTO SINGLE FILE');
     return gulp.src([
             'node_modules/jquery/dist/jquery.js',
-            // 'node_modules/popper.js/dist/popper.min.js',
-            'node_modules/bootstrap/dist/js/bootstrap.js'
+            'node_modules/bootstrap/dist/js/bootstrap.bundle.js'
         ])
         .pipe(sourcemaps.init())
         .pipe(concat('vendor.js'))
@@ -211,6 +211,18 @@ gulp.task('docs', function() {
 });
 
 
+// ------------ PROD TASKS -------------
+
+gulp.task('renameSources', function() {
+  return gulp.src('*.html')
+    .pipe(htmlreplace({
+        'js': 'assets/js/main.min.js',
+        'css': 'assets/css/main.min.css'
+    }))
+    .pipe(gulp.dest('dist/'));
+});
+
+
 // ------------ BUILD SEQUENCE -------------
 
 // SIMPLY RUN 'GULP' IN TERMINAL TO RUN LOCAL SERVER AND WATCH FOR CHANGES
@@ -221,7 +233,3 @@ gulp.task('build', function() {
     console.log('Building production ready assets');
     runSequence('clean:dist', 'sass', ['jsVendor', 'cssVendor', 'images', 'font', 'compile-js', 'compile-html', ])
 });
-
-
-
-// CUSTOM FUNCTIONS
