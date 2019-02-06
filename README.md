@@ -1,6 +1,6 @@
 # BOOTSTRAP4 GULP STARTER TEMPLATE
 
-## Developers - How to use this template
+## How to use
 
 The template is built with Sass and Gulp build system with these features:
 
