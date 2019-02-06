@@ -51,7 +51,22 @@ To use this template, your computer needs:
 
 ### Gulp Plugins:
 - [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer)
-
+- [gulp-compile-handlebars](https://www.npmjs.com/package/gulp-compile-handlebars)
+- [gulp-concat](https://www.npmjs.com/package/gulp-concat)
+- [gulp-cssmin](https://www.npmjs.com/package/gulp-cssmin)
+- [gulp-html-replace](https://www.npmjs.com/package/gulp-html-replace)
+- [gulp-htmllint](https://www.npmjs.com/package/gulp-htmllint)
+- [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin)
+- [gulp-pretty-html](https://www.npmjs.com/package/gulp-pretty-html)
+- [gulp-remove-code](https://www.npmjs.com/package/gulp-remove-code)
+- [gulp-remove-logging](https://www.npmjs.com/package/gulp-remove-logging)
+- [gulp-rename](https://www.npmjs.com/package/gulp-rename)
+- [gulp-sass](https://www.npmjs.com/package/gulp-sass)
+- [gulp-sass-lint](https://www.npmjs.com/package/gulp-sass-lint)
+- [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps)
+- [gulp-uglify](https://www.npmjs.com/package/gulp-uglify)
+- [panini](https://www.npmjs.com/package/panini)
+- [run-sequence](https://www.npmjs.com/package/run-sequence)
 
 
 ### Additional Resources:

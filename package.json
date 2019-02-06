@@ -1,16 +1,16 @@
 {
-  "name": "bootstrap-4-boiler-plate",
+  "name": "bootstrap4-gulp-starter-template",
   "version": "1.0.0",
   "description": "a bootstrap 4 boiler plate with sass, concatenation, minification, autoprefixer, sourcemaps, browser-sync, git and gulp task runner",
   "main": "index.js",
   "scripts": {
     "test": "echo \\\"Error: no test specified\\\" && exit 1"
   },
-  "author": "wowthemesnet",
+  "author": "johndavemanuel",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wowthemesnet/bootstrap-4-boilerplate"
+    "url": "https://github.com/johndavemanuel/bootstrap4-gulp-starter-template"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
