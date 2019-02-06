@@ -14,13 +14,12 @@ The template is built with Sass and Gulp build system with these features:
 
 To use this template, your computer needs:
 
--	Node.js (0.12 or greater) Node.js is used to run the build processes. https://nodejs.org/en/download/ 
+-	Node.js is used to run the build processes. https://nodejs.org/en/download/ 
 	Test: run ` node -v ` in the terminal
 -	Npm (Node comes with npm installed so you should have a version of npm.) Used to manage development dependencies.
 	Test: run ` npm -v`  in the terminal
 -	Gulp – task runner
 	`npm install -g gulp`
-
 	Test: run `gulp -v ` in the terminal
 
 ### Installing:
@@ -67,6 +66,8 @@ To use this template, your computer needs:
 - [gulp-uglify](https://www.npmjs.com/package/gulp-uglify)
 - [panini](https://www.npmjs.com/package/panini)
 - [run-sequence](https://www.npmjs.com/package/run-sequence)
+- [ansi-colors](https://www.npmjs.com/package/ansi-colors)
+- [fancy-log](https://www.npmjs.com/package/fancy)
 
 
 ### Additional Resources:
