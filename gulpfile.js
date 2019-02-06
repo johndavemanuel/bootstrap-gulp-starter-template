@@ -200,6 +200,17 @@ gulp.task('clean:dist', function() {
 });
 
 
+// CREATE DOCS FOLDER FOR DEMO
+gulp.task('docs', function() {
+    console.log('CREATING DOCS');
+    return gulp.src([
+            'dist/**/*',
+        ])
+        .pipe(gulp.dest("docs"))
+        .pipe(browserSync.stream());
+});
+
+
 // ------------ BUILD SEQUENCE -------------
 
 // SIMPLY RUN 'GULP' IN TERMINAL TO RUN LOCAL SERVER AND WATCH FOR CHANGES
