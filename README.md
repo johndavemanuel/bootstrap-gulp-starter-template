@@ -20,6 +20,7 @@ To use this template, your computer needs:
 	Test: run ` npm -v`  in the terminal
 -	Gulp – task runner
 	`npm install -g gulp`
+
 	Test: run `gulp -v ` in the terminal
 
 ### Installing:
@@ -47,12 +48,10 @@ To use this template, your computer needs:
 - `.htmllintrc` Handles the HTML lint rules.
 - `.sass-lint.yml` Handles the SASS lint rules.
 
-### SRC Folder Structure:
 
-- `src/assets/scss/_bootstrap.scss` Bootstrap variables imports.
-- `src/assets/scss/_custom.scss` Override Bootstrap variables.
-- `src/assets/scss/app.scss` This is where you will import your custom component files. Note: Do not write any scss here – every bit of CSS needs a home, more than likely this will be in components. Anything commented out gets ignored and does not get complied.
-- `src/assets/scss/theme.scss` This is where your custom style goes.
+### Gulp Plugins:
+- [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer)
+
 
 
 ### Additional Resources:
