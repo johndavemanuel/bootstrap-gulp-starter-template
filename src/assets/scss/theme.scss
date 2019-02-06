@@ -1,0 +1,113 @@
+body {
+    padding-top: 70px;
+}
+
+img {
+    max-width: 100%;
+}
+
+a,
+.a:hover {
+    transition: all 0.2s;
+}
+
+.container-fluid {
+    width: 94%;
+    margin: 0px auto;
+    max-width: 94%;
+}
+
+.border-round-0 {
+    border-radius: 0;
+}
+
+.mt-neg100 {
+    margin-top: -100px;
+}
+
+.min-50vh {
+    min-height: 50vh;
+}
+
+.dropdown-header {
+    font-size: 1.5rem;
+}
+
+.fixed-top {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+footer.footer {
+    border-top: 1px solid #f1f1f1;
+}
+
+.nav-link,
+.dropdown-item {
+    font-weight: 700;
+}
+
+.navbar {
+    padding: 0.5rem 2rem;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .2s ease;
+    background-color: #008CBA;
+}
+
+.card {
+    border: 0;
+}
+
+.card-pin:hover .overlay {
+    opacity: .5;
+    border: 5px solid #f3f3f3;
+    transition: ease .2s;
+    background-color: #000000;
+    cursor: zoom-in;
+}
+
+.more {
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-transform: uppercase;
+    transform: translate(-20%, -20%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.card-pin:hover .card-title {
+    color: #ffffff;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.card-pin:hover .more a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.card-pin:hover .download a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.social {
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.social .fa {
+    margin: 0 3px;
+}
