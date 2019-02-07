@@ -64,6 +64,7 @@ To use this template, your computer needs:
 - [gulp-sass-lint](https://www.npmjs.com/package/gulp-sass-lint)
 - [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps)
 - [gulp-uglify](https://www.npmjs.com/package/gulp-uglify)
+- [gulp-newer](https://www.npmjs.com/package/gulp-newer)
 - [panini](https://www.npmjs.com/package/panini)
 - [run-sequence](https://www.npmjs.com/package/run-sequence)
 - [ansi-colors](https://www.npmjs.com/package/ansi-colors)

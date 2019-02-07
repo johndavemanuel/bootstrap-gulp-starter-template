@@ -25,6 +25,7 @@ var gulp = require('gulp'),
     sassLint = require('gulp-sass-lint'),
     htmllint = require('gulp-htmllint'),
     htmlreplace = require('gulp-html-replace'),
+    newer = require('gulp-newer'),
     autoprefixer = require('gulp-autoprefixer');
 
 // ------------ DEVELOPMENT TASKS -------------
@@ -130,10 +131,11 @@ gulp.task('browserSyncInit', function() {
 
 // ------------ OPTIMIZATION TASKS -------------
 
-// COPIES IMAGE FILES TO DIST
+// COPIES AND MINIFY IMAGE TO DIST
 gulp.task('images', function() {
     console.log('---------------OPTIMIZING IMAGES---------------')
     return gulp.src('src/assets/img/**/*.+(png|jpg|jpeg|gif|svg)')
+        .pipe(newer('dist/assets/img/'))
         .pipe(imagemin())
         .pipe(gulp.dest('dist/assets/img/'));;
 });

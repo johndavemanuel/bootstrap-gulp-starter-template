@@ -24,6 +24,7 @@
     "gulp-html-replace": "^1.6.2",
     "gulp-htmllint": "0.0.16",
     "gulp-imagemin": "^5.0.3",
+    "gulp-newer": "^1.4.0",
     "gulp-pretty-html": "^2.0.9",
     "gulp-remove-code": "^3.0.4",
     "gulp-remove-logging": "^1.2.0",
