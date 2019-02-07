@@ -31,9 +31,8 @@ var gulp = require('gulp'),
 
 // COMPILE SASS INTO CSS
 gulp.task('sass', function() {
-    console.log('COMPILING SCSS');
+    console.log('---------------COMPILING SCSS---------------');
     return gulp.src(['src/assets/scss/*.scss'])
-        .pipe(sourcemaps.init())
         .pipe(sass({
             outputStyle: 'expanded',
             sourceComments: 'map',
@@ -41,8 +40,6 @@ gulp.task('sass', function() {
             outputStyle: 'nested'
         }).on('error', sass.logError))
         .pipe(autoprefixer('last 2 versions'))
-        .pipe(cssmin())
-        .pipe(sourcemaps.write())
         .pipe(gulp.dest("dist/assets/css"))
         .pipe(browserSync.stream());
 });
@@ -50,7 +47,7 @@ gulp.task('sass', function() {
 
 // USING PANINI, TEMPLATE, PAGE AND PARTIAL FILES ARE COMBINED TO FORM HTML MARKUP
 gulp.task('compile-html', function() {
-    console.log('COMPILING HTML WITH PANINI');
+    console.log('---------------COMPILING HTML WITH PANINI---------------');
     return gulp.src('src/pages/**/*.html')
         .pipe(panini({
             root: 'src/pages/',
@@ -68,20 +65,16 @@ gulp.task('compile-html', function() {
 
 
 gulp.task('compile-js', function() {
-    console.log('COMPILE THEME.JS');
+    console.log('---------------COMPILE THEME.JS---------------');
     return gulp.src(['src/assets/js/theme.js'])
-        .pipe(removeLog())
-        .pipe(removeCode({ production: true }))
-        .pipe(uglify())
         .pipe(gulp.dest('dist/assets/js/'));
 });
 
 
 
-
 // RESET PANINI'S CACHE OF LAYOUTS AND PARTIALS
 gulp.task('resetPages', (done) => {
-    console.log('CLEARING PANINI CACHE');
+    console.log('---------------CLEARING PANINI CACHE---------------');
     panini.refresh();
     done();
 });
@@ -89,6 +82,7 @@ gulp.task('resetPages', (done) => {
 
 // SASS LINT
 gulp.task('sassLint', function() {
+    console.log('---------------SASS LINTING---------------');
     return gulp.src('src/assets/custom/scss/*.scss')
         .pipe(sassLint())
         .pipe(sassLint.format())
@@ -113,12 +107,8 @@ function htmllintReporter(filepath, issues) {
 
 
 // WATCHES FOR CHANGES WHILE GULP IS RUNNING
-gulp.task('watch', ['sass'], function() {
-    console.log('WATCHING FOR CHANGES');
-    browserSync.init({
-        server: "./dist"
-    });
-
+gulp.task('watch', ['sass', 'browserSyncInit'], function() {
+    console.log('---------------WATCHING FOR CHANGES---------------');
     gulp.watch(['src/**/*.html'], ['resetPages', 'compile-html', browserSync.reload]);
     gulp.watch(['src/assets/scss/**/*'], ['sass', browserSync.reload]);
     gulp.watch(['src/assets/js/*.js'], ['compile-js', browserSync.reload]);
@@ -126,11 +116,23 @@ gulp.task('watch', ['sass'], function() {
 });
 
 
+
+
+// BROWSER SYNC
+gulp.task('browserSyncInit', function() {
+    console.log('---------------BROWSER SYNC---------------');
+    browserSync.init({
+        server: "./dist"
+    });
+
+});
+
+
 // ------------ OPTIMIZATION TASKS -------------
 
 // COPIES IMAGE FILES TO DIST
 gulp.task('images', function() {
-    console.log('OPTIMIZING IMAGES')
+    console.log('---------------OPTIMIZING IMAGES---------------')
     return gulp.src('src/assets/img/**/*.+(png|jpg|jpeg|gif|svg)')
         .pipe(imagemin())
         .pipe(gulp.dest('dist/assets/img/'));;
@@ -140,7 +142,7 @@ gulp.task('images', function() {
 
 // PLACES FONT FILES IN THE DIST FOLDER
 gulp.task('font', function() {
-    console.log('COPYING FONTS INTO DIST FOLDER');
+    console.log('---------------COPYING FONTS INTO DIST FOLDER---------------');
     return gulp.src([
             'src/assets/font/*',
         ])
@@ -148,32 +150,24 @@ gulp.task('font', function() {
         .pipe(browserSync.stream());
 });
 
-// CONCATENATING JS FILES
+// COPY JS VENDOR FILES
 gulp.task('jsVendor', function() {
-    console.log('CONCATENATING JAVASCRIPT FILES INTO SINGLE FILE');
+    console.log('---------------COPY JAVASCRIPT FILES INTO DIST---------------');
     return gulp.src([
             'node_modules/jquery/dist/jquery.js',
             'node_modules/bootstrap/dist/js/bootstrap.bundle.js'
         ])
-        .pipe(sourcemaps.init())
-        .pipe(concat('vendor.js'))
-        .pipe(sourcemaps.write('./'))
-        // .pipe(uglify())
         .pipe(gulp.dest('dist/assets/vendor/js'))
         .pipe(browserSync.stream());
 });
 
 
-// CONCATENATING CSS FILES
+// COPY CSS VENDOR FILES
 gulp.task('cssVendor', function() {
-    console.log('CONCATENATING CSS FILES INTO SINGLE FILE');
+    console.log('---------------COPY CSS FILES INTO DIST---------------');
     return gulp.src([
             'src/assets/vendor/css/*',
         ])
-        .pipe(sourcemaps.init())
-        .pipe(concat('vendor.css'))
-        .pipe(sourcemaps.write('./'))
-        .pipe(cssmin())
         .pipe(gulp.dest('dist/assets/vendor/css'))
         .pipe(browserSync.stream());
 });
@@ -195,14 +189,14 @@ gulp.task('prettyHTML', function() {
 
 // CLEANING/DELETING FILES NO LONGER BEING USED IN DIST FOLDER
 gulp.task('clean:dist', function() {
-    console.log('REMOVING OLD FILES FROM DIST');
+    console.log('---------------REMOVING OLD FILES FROM DIST---------------');
     return del.sync('dist');
 });
 
 
 // CREATE DOCS FOLDER FOR DEMO
 gulp.task('docs', function() {
-    console.log('CREATING DOCS');
+    console.log('---------------CREATING DOCS---------------');
     return gulp.src([
             'dist/**/*',
         ])
@@ -211,15 +205,59 @@ gulp.task('docs', function() {
 });
 
 
-// ------------ PROD TASKS -------------
+// ------------ PRODUCTION TASKS -------------
 
+// CHANGE TO MINIFIED VERSIONS
 gulp.task('renameSources', function() {
-  return gulp.src('*.html')
-    .pipe(htmlreplace({
-        'js': 'assets/js/main.min.js',
-        'css': 'assets/css/main.min.css'
-    }))
-    .pipe(gulp.dest('dist/'));
+    console.log('---------------RENAMING SOURCES---------------');
+    return gulp.src('dist/*.html')
+        .pipe(htmlreplace({
+            'js': 'assets/js/main.min.js',
+            'css': 'assets/css/main.min.css'
+        }))
+        .pipe(gulp.dest('dist/'));
+});
+
+// CONCATINATE SCRIPTS
+gulp.task("concatScripts", function() {
+    console.log('---------------CONCATINATE SCRIPTS---------------');
+    return gulp.src([
+            'dist/assets/vendor/js/jquery.js',
+            'dist/assets/vendor/js/vendor/bootstrap.bundle.js',
+            'dist/assets/js/*'
+        ])
+        .pipe(sourcemaps.init())
+        .pipe(concat('main.js'))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('dist/assets/vendor/js'))
+        .pipe(browserSync.stream());
+});
+
+// MINIFY SCRIPTS
+gulp.task("minifyScripts", ["concatScripts"], function() {
+    console.log('---------------MINIFY SCRIPTS---------------');
+    return gulp.src("dist/assets/vendor/js/main.js")
+        .pipe(removeLog())
+        .pipe(removeCode({ production: true }))
+        .pipe(uglify())
+        .pipe(rename('main.min.js'))
+        .pipe(gulp.dest('dist/assets/js'));
+});
+
+// MINIFY CSS
+gulp.task("minifyCss", function() {
+    console.log('---------------MINIFY CSS---------------');
+    return gulp.src([
+        'dist/assets/css/bootstrap.css',
+        'dist/assets/css/theme.css',
+        'dist/assets/vendor/css/**/*'
+        ])
+        .pipe(sourcemaps.init())
+        .pipe(concat('main.css'))
+        .pipe(sourcemaps.write('./'))
+        .pipe(cssmin())
+        .pipe(rename('main.min.css'))
+        .pipe(gulp.dest('dist/assets/css'));
 });
 
 
@@ -230,6 +268,6 @@ gulp.task('default', ['clean:dist', 'font', 'jsVendor', 'cssVendor', 'images', '
 
 // CREATES PRODUCTION READY ASSETS IN DIST FOLDER
 gulp.task('build', function() {
-    console.log('Building production ready assets');
-    runSequence('clean:dist', 'sass', ['jsVendor', 'cssVendor', 'images', 'font', 'compile-js', 'compile-html', ])
+    console.log('---------------BUILDING PRODUCTION READY ASSETS---------------');
+    runSequence('clean:dist', 'sass', ['jsVendor', 'cssVendor', 'images', 'font', 'compile-js', 'compile-html'], 'minifyScripts', 'minifyCss', 'renameSources', 'prettyHTML', 'browserSyncInit')
 });
