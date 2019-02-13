@@ -2,6 +2,7 @@
 // Once the package is found, we assign its contents to the variable
 // gulp.src tells the Gulp task what files to use for the task
 // gulp.dest tells Gulp where to output the files once the task is completed.
+'use strict';
 
 var gulp = require('gulp'),
     log = require('fancy-log'),
