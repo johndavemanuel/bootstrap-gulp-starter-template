@@ -104,17 +104,20 @@ function htmllintReporter(filepath, issues) {
         });
         process.exitCode = 1;
     }
-}
 
+    else {
+        console.log("---------------NO LINT ERROR---------------")
+    }
+}
 
 // RUN TEST LINTERS
 gulp.task('test',['htmlLint', 'sassLint'], function() {
-    console.log('---------------RUNNING TEST LINTERS---------------');
+    console.log('---------------DONE TEST LINTERS---------------');
 });
 
 
 // WATCHES FOR CHANGES WHILE GULP IS RUNNING
-gulp.task('watch', ['sass', 'browserSyncInit'], function() {
+gulp.task('watch', ['sass', 'test', 'browserSyncInit'], function() {
     console.log('---------------WATCHING FOR CHANGES---------------');
     gulp.watch(['src/**/*.html'], ['resetPages', 'compile-html', browserSync.reload]);
     gulp.watch(['src/assets/scss/**/*'], ['sass', browserSync.reload]);
@@ -129,7 +132,6 @@ gulp.task('browserSyncInit', function() {
     browserSync.init({
         server: "./dist"
     });
-
 });
 
 
@@ -143,7 +145,6 @@ gulp.task('images', function() {
         .pipe(imagemin())
         .pipe(gulp.dest('dist/assets/img/'));;
 });
-
 
 
 // PLACES FONT FILES IN THE DIST FOLDER
@@ -190,7 +191,6 @@ gulp.task('prettyHTML', function() {
         }))
         .pipe(gulp.dest('dist'))
 });
-
 
 
 // CLEANING/DELETING FILES NO LONGER BEING USED IN DIST FOLDER
@@ -270,10 +270,10 @@ gulp.task("minifyCss", function() {
 // ------------ BUILD SEQUENCE -------------
 
 // SIMPLY RUN 'GULP' IN TERMINAL TO RUN LOCAL SERVER AND WATCH FOR CHANGES
-gulp.task('default', ['clean:dist', 'font', 'jsVendor', 'cssVendor', 'images', 'compile-html', 'compile-js', 'resetPages', 'prettyHTML', 'watch']);
+gulp.task('dev', ['clean:dist', 'font', 'jsVendor', 'cssVendor', 'images', 'compile-html', 'compile-js', 'resetPages', 'prettyHTML', 'watch']);
 
 // CREATES PRODUCTION READY ASSETS IN DIST FOLDER
 gulp.task('build', function() {
     console.log('---------------BUILDING PRODUCTION READY ASSETS---------------');
-    runSequence('clean:dist', 'sass', ['jsVendor', 'cssVendor', 'images', 'font', 'compile-js', 'compile-html'], 'minifyScripts', 'minifyCss', 'renameSources', 'prettyHTML', 'browserSyncInit')
+    runSequence('clean:dist', 'sass', ['jsVendor', 'cssVendor', 'images', 'font', 'compile-js', 'compile-html'], 'minifyScripts', 'minifyCss', 'renameSources', 'prettyHTML', 'browserSyncInit', 'docs')
 });
