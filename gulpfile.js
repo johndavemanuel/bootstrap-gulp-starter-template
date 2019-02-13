@@ -84,7 +84,7 @@ gulp.task('resetPages', (done) => {
 // SASS LINT
 gulp.task('sassLint', function() {
     console.log('---------------SASS LINTING---------------');
-    return gulp.src('src/assets/custom/scss/*.scss')
+    return gulp.src('src/assets/scss/theme.scss')
         .pipe(sassLint())
         .pipe(sassLint.format())
         .pipe(sassLint.failOnError())
@@ -107,6 +107,12 @@ function htmllintReporter(filepath, issues) {
 }
 
 
+// RUN TEST LINTERS
+gulp.task('test',['htmlLint', 'sassLint'], function() {
+    console.log('---------------RUNNING TEST LINTERS---------------');
+});
+
+
 // WATCHES FOR CHANGES WHILE GULP IS RUNNING
 gulp.task('watch', ['sass', 'browserSyncInit'], function() {
     console.log('---------------WATCHING FOR CHANGES---------------');
@@ -115,8 +121,6 @@ gulp.task('watch', ['sass', 'browserSyncInit'], function() {
     gulp.watch(['src/assets/js/*.js'], ['compile-js', browserSync.reload]);
     gulp.watch(['src/assets/img/**/*'], ['images', browserSync.reload]);
 });
-
-
 
 
 // BROWSER SYNC
