@@ -1,5 +1,9 @@
+$primary-color: #333;
 $border-outline-color: #f1f1f1;
 
+@mixin transform($property) {
+    transform: $property;
+}
 
 body {
     padding-top: 70px;
@@ -11,15 +15,21 @@ img {
 
 a,
 .a:hover {
-    transition: all 0.2s;
+    transition: all .2s;
 }
 
 .fixed-top {
     border-bottom: 1px solid $border-outline-color;
 }
 
-footer.footer {
-    border-top: 1px solid $border-outline-color;
+footer {
+    .footer {
+        border-top: 1px solid $border-outline-color;
+    }
+}
+
+.box {
+    @include transform(rotate(30deg));
 }
 
 .nav-link,
@@ -28,17 +38,30 @@ footer.footer {
 }
 
 .navbar {
-    padding: 0.5rem 2rem;
+    padding: .5rem 2rem;
 }
 
-input[type='email'] {
-    content: 'foo';
+%message-shared {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #333;
 }
 
-div.foo {
-    content: 'foo';
+.message {
+    @extend %message-shared;
 }
 
-ul#foo {
-    content: 'foo';
+.success {
+    @extend %message-shared;
+    border-color: green;
+}
+
+.error {
+    @extend %message-shared;
+    border-color: red;
+}
+
+.warning {
+    @extend %message-shared;
+    border-color: yellow;
 }

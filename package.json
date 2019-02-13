@@ -24,6 +24,7 @@
     "gulp-html-replace": "^1.6.2",
     "gulp-htmllint": "0.0.16",
     "gulp-imagemin": "^5.0.3",
+    "gulp-jshint": "^2.1.0",
     "gulp-newer": "^1.4.0",
     "gulp-pretty-html": "^2.0.9",
     "gulp-remove-code": "^3.0.4",
@@ -33,6 +34,7 @@
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
+    "jshint": "^2.10.1",
     "panini": "^1.6.3",
     "run-sequence": "^2.2.1"
   },

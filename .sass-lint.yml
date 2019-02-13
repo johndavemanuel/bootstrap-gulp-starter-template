@@ -41,7 +41,7 @@ rules:
               allow-element-with-id: true
   no-trailing-whitespace: 1
   no-trailing-zero: 1
-  no-transition-all: 1
+  no-transition-all: 0
   no-universal-selectors: 0
   no-url-domains: 1
   no-url-protocols: 1

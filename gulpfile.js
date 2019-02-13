@@ -24,6 +24,7 @@ var gulp = require('gulp'),
     prettyHtml = require('gulp-pretty-html'),
     sassLint = require('gulp-sass-lint'),
     htmllint = require('gulp-htmllint'),
+    jshint = require('gulp-jshint'),
     htmlreplace = require('gulp-html-replace'),
     newer = require('gulp-newer'),
     autoprefixer = require('gulp-autoprefixer');
@@ -110,8 +111,15 @@ function htmllintReporter(filepath, issues) {
     }
 }
 
+gulp.task('jslint', function() {
+    return gulp.src('src/assets/js/*.js')
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'));
+  });
+
+
 // RUN TEST LINTERS
-gulp.task('test',['htmlLint', 'sassLint'], function() {
+gulp.task('test',['htmlLint', 'sassLint', 'jslint'], function() {
     console.log('---------------DONE TEST LINTERS---------------');
 });
 

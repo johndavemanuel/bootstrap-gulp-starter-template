@@ -1,32 +1,55 @@
-/* line 1, src/assets/scss/theme.scss */
+/* line 8, src/assets/scss/theme.scss */
 body {
   padding-top: 70px; }
 
-/* line 5, src/assets/scss/theme.scss */
+/* line 12, src/assets/scss/theme.scss */
 img {
   max-width: 100%; }
 
-/* line 9, src/assets/scss/theme.scss */
+/* line 16, src/assets/scss/theme.scss */
 a,
 .a:hover {
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s; }
+  -webkit-transition: all .2s;
+  transition: all .2s; }
 
-/* line 14, src/assets/scss/theme.scss */
+/* line 21, src/assets/scss/theme.scss */
 .fixed-top {
   border-bottom: 1px solid #f1f1f1; }
 
-/* line 18, src/assets/scss/theme.scss */
-footer.footer {
+/* line 26, src/assets/scss/theme.scss */
+footer .footer {
   border-top: 1px solid #f1f1f1; }
 
-/* line 22, src/assets/scss/theme.scss */
+/* line 31, src/assets/scss/theme.scss */
+.box {
+  -webkit-transform: rotate(30deg);
+          transform: rotate(30deg); }
+
+/* line 35, src/assets/scss/theme.scss */
 .nav-link,
 .dropdown-item {
   font-weight: 700; }
 
-/* line 27, src/assets/scss/theme.scss */
+/* line 40, src/assets/scss/theme.scss */
 .navbar {
-  padding: 0.5rem 2rem; }
+  padding: .5rem 2rem; }
+
+/* line 44, src/assets/scss/theme.scss */
+.message, .success, .error, .warning {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+/* line 54, src/assets/scss/theme.scss */
+.success {
+  border-color: green; }
+
+/* line 59, src/assets/scss/theme.scss */
+.error {
+  border-color: red; }
+
+/* line 64, src/assets/scss/theme.scss */
+.warning {
+  border-color: yellow; }
 
 /*# sourceMappingURL=../../../sass */
