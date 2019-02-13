@@ -13,109 +13,20 @@ a,
   transition: all 0.2s; }
 
 /* line 14, src/assets/scss/theme.scss */
-.container-fluid {
-  width: 94%;
-  margin: 0px auto;
-  max-width: 94%; }
-
-/* line 20, src/assets/scss/theme.scss */
-.border-round-0 {
-  border-radius: 0; }
-
-/* line 24, src/assets/scss/theme.scss */
-.mt-neg100 {
-  margin-top: -100px; }
-
-/* line 28, src/assets/scss/theme.scss */
-.min-50vh {
-  min-height: 50vh; }
-
-/* line 32, src/assets/scss/theme.scss */
-.dropdown-header {
-  font-size: 1.5rem; }
-
-/* line 36, src/assets/scss/theme.scss */
 .fixed-top {
   border-bottom: 1px solid #f1f1f1; }
 
-/* line 40, src/assets/scss/theme.scss */
+/* line 18, src/assets/scss/theme.scss */
 footer.footer {
   border-top: 1px solid #f1f1f1; }
 
-/* line 44, src/assets/scss/theme.scss */
+/* line 22, src/assets/scss/theme.scss */
 .nav-link,
 .dropdown-item {
   font-weight: 700; }
 
-/* line 49, src/assets/scss/theme.scss */
+/* line 27, src/assets/scss/theme.scss */
 .navbar {
   padding: 0.5rem 2rem; }
-
-/* line 53, src/assets/scss/theme.scss */
-.overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  -webkit-transition: .2s ease;
-  transition: .2s ease;
-  background-color: #008CBA; }
-
-/* line 66, src/assets/scss/theme.scss */
-.card {
-  border: 0; }
-
-/* line 70, src/assets/scss/theme.scss */
-.card-pin:hover .overlay {
-  opacity: .5;
-  border: 5px solid #f3f3f3;
-  -webkit-transition: ease .2s;
-  transition: ease .2s;
-  background-color: #000000;
-  cursor: -webkit-zoom-in;
-  cursor: zoom-in; }
-
-/* line 78, src/assets/scss/theme.scss */
-.more {
-  color: white;
-  font-size: 14px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  text-transform: uppercase;
-  -webkit-transform: translate(-20%, -20%);
-          transform: translate(-20%, -20%);
-  -ms-transform: translate(-50%, -50%); }
-
-/* line 89, src/assets/scss/theme.scss */
-.card-pin:hover .card-title {
-  color: #ffffff;
-  margin-top: 10px;
-  text-align: center;
-  font-size: 1.2em; }
-
-/* line 96, src/assets/scss/theme.scss */
-.card-pin:hover .more a {
-  text-decoration: none;
-  color: #ffffff; }
-
-/* line 101, src/assets/scss/theme.scss */
-.card-pin:hover .download a {
-  text-decoration: none;
-  color: #ffffff; }
-
-/* line 106, src/assets/scss/theme.scss */
-.social {
-  position: relative;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%); }
-
-/* line 111, src/assets/scss/theme.scss */
-.social .fa {
-  margin: 0 3px; }
 
 /*# sourceMappingURL=../../../sass */
