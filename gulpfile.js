@@ -39,7 +39,6 @@ gulp.task('sass', function() {
             outputStyle: 'expanded',
             sourceComments: 'map',
             sourceMap: 'sass',
-            outputStyle: 'nested'
         }).on('error', sass.logError))
         .pipe(autoprefixer('last 2 versions'))
         .pipe(gulp.dest("dist/assets/css"))
@@ -88,7 +87,7 @@ gulp.task('sassLint', function() {
     return gulp.src('src/assets/scss/theme.scss')
         .pipe(sassLint())
         .pipe(sassLint.format())
-        .pipe(sassLint.failOnError())
+        .pipe(sassLint.failOnError());
 });
 
 // HTML LINTER
@@ -107,7 +106,7 @@ function htmllintReporter(filepath, issues) {
     }
 
     else {
-        console.log("---------------NO LINT ERROR---------------")
+        console.log("---------------NO LINT ERROR---------------");
     }
 }
 
@@ -147,11 +146,11 @@ gulp.task('browserSyncInit', function() {
 
 // COPIES AND MINIFY IMAGE TO DIST
 gulp.task('images', function() {
-    console.log('---------------OPTIMIZING IMAGES---------------')
+    console.log('---------------OPTIMIZING IMAGES---------------');
     return gulp.src('src/assets/img/**/*.+(png|jpg|jpeg|gif|svg)')
         .pipe(newer('dist/assets/img/'))
         .pipe(imagemin())
-        .pipe(gulp.dest('dist/assets/img/'));;
+        .pipe(gulp.dest('dist/assets/img/'));
 });
 
 
@@ -197,7 +196,7 @@ gulp.task('prettyHTML', function() {
             indent_char: ' ',
             unformatted: ['code', 'pre', 'em', 'strong', 'span', 'i', 'b', 'br']
         }))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dist'));
 });
 
 
@@ -283,5 +282,5 @@ gulp.task('dev', ['clean:dist', 'font', 'jsVendor', 'cssVendor', 'images', 'comp
 // CREATES PRODUCTION READY ASSETS IN DIST FOLDER
 gulp.task('build', function() {
     console.log('---------------BUILDING PRODUCTION READY ASSETS---------------');
-    runSequence('clean:dist', 'sass', ['jsVendor', 'cssVendor', 'images', 'font', 'compile-js', 'compile-html'], 'minifyScripts', 'minifyCss', 'renameSources', 'prettyHTML', 'browserSyncInit', 'docs')
+    runSequence('clean:dist', 'sass', ['jsVendor', 'cssVendor', 'images', 'font', 'compile-js', 'compile-html'], 'minifyScripts', 'minifyCss', 'renameSources', 'prettyHTML', 'browserSyncInit', 'docs');
 });
