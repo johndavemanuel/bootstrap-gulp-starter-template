@@ -74,10 +74,9 @@ gulp.task('compile-js', function() {
 
 
 // RESET PANINI'S CACHE OF LAYOUTS AND PARTIALS
-gulp.task('resetPages', (done) => {
+gulp.task('resetPages', function() {
     console.log('---------------CLEARING PANINI CACHE---------------');
     panini.refresh();
-    done();
 });
 
 
