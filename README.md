@@ -1,5 +1,9 @@
 # BOOTSTRAP 4 GULP STARTER TEMPLATE
 
+### NOTE
+
+The `docs` folder is for demo purposes only. 
+
 ### How to use
 
 The template is built with Sass and Gulp build system with these features:
@@ -15,12 +19,12 @@ The template is built with Sass and Gulp build system with these features:
 To use this template, your computer needs:
 
 -	Node.js is used to run the build processes. https://nodejs.org/en/download/ 
-	Test: run ` node -v ` in the terminal
+-   Test: run ` node -v ` in the terminal
 -	Npm (Node comes with npm installed so you should have a version of npm.) Used to manage development dependencies.
-	Test: run ` npm -v`  in the terminal
+-   Test: run ` npm -v`  in the terminal
 -	Gulp – task runner
 	`npm install -g gulp`
-	Test: run `gulp -v ` in the terminal
+-	Test: run `gulp -v ` in the terminal
 
 ### Installing:
 
