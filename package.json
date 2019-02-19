@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "a bootstrap 4 boiler plate with sass, concatenation, minification, autoprefixer, sourcemaps, browser-sync, git and gulp task runner",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "johndavemanuel",
   "license": "MIT",
   "repository": {
@@ -34,6 +33,7 @@
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
     "jshint": "^2.10.1",
+    "node-bourbon": "^4.2.8",
     "panini": "^1.6.3",
     "run-sequence": "^2.2.1"
   },

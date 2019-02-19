@@ -1,3 +1,5 @@
+@import "bourbon";
+
 $primary-color: #333;
 $border-outline-color: #f1f1f1;
 
@@ -65,3 +67,7 @@ footer {
     @extend %message-shared;
     border-color: yellow;
 }
+
+.text {
+    @include border-color(#a60b55 #76cd9c null #e8ae1a);
+  }

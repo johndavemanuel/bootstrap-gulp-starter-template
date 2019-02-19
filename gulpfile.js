@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     colors = require('ansi-colors'),
     browserSync = require('browser-sync').create(),
     sass = require('gulp-sass'),
+    bourbon = require('node-bourbon').includePaths,
     cssmin = require('gulp-cssmin'),
     csscomb = require('csscomb'),
     handlebars = require('gulp-compile-handlebars'),
@@ -40,6 +41,7 @@ gulp.task('sass', function() {
             outputStyle: 'expanded',
             sourceComments: 'map',
             sourceMap: 'sass',
+            includePaths: bourbon
         }).on('error', sass.logError))
         .pipe(autoprefixer('last 2 versions'))
         .pipe(gulp.dest("dist/assets/css"))

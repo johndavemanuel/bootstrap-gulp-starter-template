@@ -61,6 +61,7 @@ To use this template, your computer needs:
 - [gulp-remove-logging](https://www.npmjs.com/package/gulp-remove-logging)
 - [gulp-rename](https://www.npmjs.com/package/gulp-rename)
 - [gulp-sass](https://www.npmjs.com/package/gulp-sass)
+- [node-bourbon](https://www.npmjs.com/package/node-bourbon)
 - [gulp-sass-lint](https://www.npmjs.com/package/gulp-sass-lint)
 - [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps)
 - [gulp-uglify](https://www.npmjs.com/package/gulp-uglify)
