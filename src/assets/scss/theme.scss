@@ -1,18 +1,28 @@
+// IMPORTS
 @import "bourbon";
 
+// VARIABLES
 $primary-color: #333;
 $border-outline-color: #f1f1f1;
 
+// MIXINS
 @mixin transform($property) {
     transform: $property;
 }
 
-body {
-    padding-top: 70px;
+
+// EXTENDS
+%message-shared {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #333;
 }
 
-img {
-    max-width: 100%;
+
+// DEMO 
+
+body {
+    padding-top: 70px;
 }
 
 a,
@@ -24,16 +34,6 @@ a,
     border-bottom: 1px solid $border-outline-color;
 }
 
-footer {
-    .footer {
-        border-top: 1px solid $border-outline-color;
-    }
-}
-
-.box {
-    @include transform(rotate(30deg));
-}
-
 .nav-link,
 .dropdown-item {
     font-weight: 700;
@@ -43,31 +43,8 @@ footer {
     padding: .5rem 2rem;
 }
 
-%message-shared {
-    border: 1px solid #ccc;
-    padding: 10px;
-    color: #333;
+footer {
+    .footer {
+        border-top: 1px solid $border-outline-color;
+    }
 }
-
-.message {
-    @extend %message-shared;
-}
-
-.success {
-    @extend %message-shared;
-    border-color: green;
-}
-
-.error {
-    @extend %message-shared;
-    border-color: red;
-}
-
-.warning {
-    @extend %message-shared;
-    border-color: yellow;
-}
-
-.text {
-    @include border-color(#a60b55 #76cd9c null #e8ae1a);
-  }
