@@ -1,5 +1,5 @@
 // IMPORTS
-@import "bourbon";
+@import 'bourbon';
 
 // VARIABLES
 $primary-color: #333;
@@ -13,9 +13,9 @@ $border-outline-color: #f1f1f1;
 
 // EXTENDS
 %message-shared {
-    border: 1px solid #ccc;
+    border: 1px solid $primary-color;
     padding: 10px;
-    color: #333;
+    color: $primary-color;
 }
 
 
