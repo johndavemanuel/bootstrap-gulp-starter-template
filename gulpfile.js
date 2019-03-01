@@ -29,7 +29,8 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     htmlreplace = require('gulp-html-replace'),
     newer = require('gulp-newer'),
-    autoprefixer = require('gulp-autoprefixer');
+    autoprefixer = require('gulp-autoprefixer'),
+    accessibility = require('gulp-accessibility');
 
 // ------------ DEVELOPMENT TASKS -------------
 
@@ -219,6 +220,19 @@ gulp.task('docs', function() {
         .pipe(browserSync.stream());
 });
 
+// ACCESSIBILITY CHECK
+gulp.task('accessibility', function() {
+    return gulp.src('dist/*.html')
+      .pipe(accessibility({
+        force: true
+      }))
+      .on('error', console.log)
+      .pipe(accessibility.report({reportType: 'txt'}))
+      .pipe(rename({
+        extname: '.txt'
+      }))
+      .pipe(gulp.dest('reports/txt'));
+  });
 
 // ------------ PRODUCTION TASKS -------------
 
