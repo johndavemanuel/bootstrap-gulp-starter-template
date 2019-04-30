@@ -10587,6 +10587,8 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
+"use strict";
+
 $(document).ready(function() {
     //removeIf(production)
     console.log("a");

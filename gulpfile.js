@@ -87,7 +87,7 @@ gulp.task('resetPages', function() {
 // SASS LINT
 gulp.task('sassLint', function() {
     console.log('---------------SASS LINTING---------------');
-    return gulp.src('src/assets/scss/theme.scss')
+    return gulp.src('src/assets/scss/**/*.scss')
         .pipe(sassLint())
         .pipe(sassLint.format())
         .pipe(sassLint.failOnError());
@@ -107,9 +107,8 @@ function htmllintReporter(filepath, issues) {
         });
         process.exitCode = 1;
     }
-
     else {
-        console.log("---------------NO LINT ERROR---------------");
+        console.log("---------------NO HTML LINT ERROR---------------");
     }
 }
 
