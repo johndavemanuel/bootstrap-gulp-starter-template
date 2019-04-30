@@ -20,6 +20,7 @@
     "gulp-compile-handlebars": "^0.6.1",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
+    "gulp-gh-pages": "^0.5.4",
     "gulp-html-replace": "^1.6.2",
     "gulp-htmllint": "0.0.16",
     "gulp-imagemin": "^5.0.3",
@@ -40,7 +41,7 @@
   },
   "dependencies": {
     "ansi-colors": "^3.2.3",
-    "bootstrap": "^4.2.1",
+    "bootstrap": "^4.3.1",
     "fancy-log": "^1.3.3",
     "gulp-pug": "^4.0.1",
     "jquery": "^3.3.1",

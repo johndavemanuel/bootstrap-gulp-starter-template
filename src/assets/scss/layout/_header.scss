@@ -1,0 +1,15 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+.navbar {
+    padding: .5rem 2rem;
+}
+
+.fixed-top {
+    border-bottom: 1px solid $border-outline-color;
+}
+
+.nav-link,
+.dropdown-item {
+    font-weight: 700;
+}

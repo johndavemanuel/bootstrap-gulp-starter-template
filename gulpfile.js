@@ -30,14 +30,15 @@ var gulp = require('gulp'),
     htmlreplace = require('gulp-html-replace'),
     newer = require('gulp-newer'),
     autoprefixer = require('gulp-autoprefixer'),
-    accessibility = require('gulp-accessibility');
+    accessibility = require('gulp-accessibility'),
+    ghPages = require('gulp-gh-pages');
 
 // ------------ DEVELOPMENT TASKS -------------
 
 // COMPILE SASS INTO CSS
 gulp.task('sass', function() {
     console.log('---------------COMPILING SCSS---------------');
-    return gulp.src(['src/assets/scss/*.scss'])
+    return gulp.src(['src/assets/scss/main.scss'])
         .pipe(sass({
             outputStyle: 'expanded',
             sourceComments: 'map',
@@ -68,13 +69,12 @@ gulp.task('compile-html', function() {
         .pipe(gulp.dest('dist'));
 });
 
-
+// COPY CUSTOM JS
 gulp.task('compile-js', function() {
     console.log('---------------COMPILE THEME.JS---------------');
     return gulp.src(['src/assets/js/theme.js'])
         .pipe(gulp.dest('dist/assets/js/'));
 });
-
 
 
 // RESET PANINI'S CACHE OF LAYOUTS AND PARTIALS
@@ -113,7 +113,8 @@ function htmllintReporter(filepath, issues) {
     }
 }
 
-gulp.task('jslint', function() {
+// JS KINTER
+gulp.task('jsLint', function() {
     return gulp.src('src/assets/js/*.js')
       .pipe(jshint())
       .pipe(jshint.reporter('default'));
@@ -121,13 +122,13 @@ gulp.task('jslint', function() {
 
 
 // RUN TEST LINTERS
-gulp.task('test',['htmlLint', 'sassLint', 'jslint'], function() {
+gulp.task('linters',['htmlLint', 'sassLint', 'jsLint'], function() {
     console.log('---------------DONE TEST LINTERS---------------');
 });
 
 
 // WATCHES FOR CHANGES WHILE GULP IS RUNNING
-gulp.task('watch', ['sass', 'test', 'browserSyncInit'], function() {
+gulp.task('watch', ['sass', 'linters', 'browserSyncInit'], function() {
     console.log('---------------WATCHING FOR CHANGES---------------');
     gulp.watch(['src/**/*.html'], ['resetPages', 'compile-html', browserSync.reload]);
     gulp.watch(['src/assets/scss/**/*'], ['sass', browserSync.reload]);
@@ -144,6 +145,15 @@ gulp.task('browserSyncInit', function() {
     });
 });
 
+// DEPLOY TO GIT 
+gulp.task('deploy', function() {
+    return gulp.src('/*')
+      .pipe(ghPages({
+        remoteUrl: 'https://github.com/johndavemanuel/bootstrap4-gulp-starter-template.git',
+        branch:   'master',
+        message: 'Automated update of contents via gulp'
+      }));
+});
 
 // ------------ OPTIMIZATION TASKS -------------
 
@@ -277,8 +287,7 @@ gulp.task("minifyScripts", ["concatScripts"], function() {
 gulp.task("minifyCss", function() {
     console.log('---------------MINIFY CSS---------------');
     return gulp.src([
-        'dist/assets/css/bootstrap.css',
-        'dist/assets/css/theme.css',
+        'dist/assets/css/main.css',
         'dist/assets/vendor/css/**/*'
         ])
         .pipe(sourcemaps.init())
