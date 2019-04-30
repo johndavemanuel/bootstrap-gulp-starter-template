@@ -46,6 +46,7 @@ To use this template, your computer needs:
 - `src/layouts/` HTML layouts (templates).
 - `src/pages/` Site pages.
 - `src/partials/` Handlebars partials.
+- `reports` txt file for accessibility issues
 - `gulpfile.js` Task definitions.
 - `package.json` Handles the front-end dependencies.
 - `.htmllintrc` Handles the HTML lint rules.
@@ -72,6 +73,7 @@ To use this template, your computer needs:
 - [gulp-newer](https://www.npmjs.com/package/gulp-newer)
 - [gulp-accessibility](https://www.npmjs.com/package/gulp-accessibility)
 - [gulp-jshint](https://www.npmjs.com/package/gulp-jshint)
+- [gulp-gulp-gh-pages](https://www.npmjs.com/package/gulp-gh-pages)
 - [panini](https://www.npmjs.com/package/panini)
 - [run-sequence](https://www.npmjs.com/package/run-sequence)
 - [ansi-colors](https://www.npmjs.com/package/ansi-colors)
