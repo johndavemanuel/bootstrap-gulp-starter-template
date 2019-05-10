@@ -74,6 +74,7 @@ To use this template, your computer needs:
 - [gulp-accessibility](https://www.npmjs.com/package/gulp-accessibility)
 - [gulp-jshint](https://www.npmjs.com/package/gulp-jshint)
 - [gulp-gulp-gh-pages](https://www.npmjs.com/package/gulp-gh-pages)
+- [gulp-babel](https://www.npmjs.com/package/gulp-babel)
 - [panini](https://www.npmjs.com/package/panini)
 - [run-sequence](https://www.npmjs.com/package/run-sequence)
 - [ansi-colors](https://www.npmjs.com/package/ansi-colors)
