@@ -13071,7 +13071,7 @@ a:hover, a:active, a:focus {
 /* line 4, src/assets/scss/base/_typography.scss */
 body {
   color: #222222;
-  font: normal 125%/1.4 "Open Sans", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font: normal 100%/1.4 "Open Sans", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 /**
