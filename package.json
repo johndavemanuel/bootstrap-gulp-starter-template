@@ -11,12 +11,15 @@
     "url": "https://github.com/johndavemanuel/bootstrap4-gulp-starter-template"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "ansi-colors": "^3.2.3",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "browser-sync": "^2.18.13",
     "csscomb": "^4.2.0",
     "del": "^3.0.0",
+    "fancy-log": "^1.3.3",
     "gulp": "^3.9.1",
     "gulp-accessibility": "^3.1.1",
     "gulp-autoprefixer": "^4.0.0",
@@ -38,16 +41,14 @@
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
+    "gulp-uglify-es": "^1.0.4",
     "jshint": "^2.10.1",
     "node-bourbon": "^4.2.8",
     "panini": "^1.6.3",
     "run-sequence": "^2.2.1"
   },
   "dependencies": {
-    "@babel/core": "^7.4.4",
-    "ansi-colors": "^3.2.3",
     "bootstrap": "^4.3.1",
-    "fancy-log": "^1.3.3",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7"
   }

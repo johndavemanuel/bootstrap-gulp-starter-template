@@ -17,7 +17,7 @@ var gulp = require('gulp'),
   concat = require('gulp-concat'),
   del = require('del'),
   panini = require('panini'),
-  uglify = require('gulp-uglify'),
+  uglify = require('gulp-uglify-es').default,
   sourcemaps = require('gulp-sourcemaps'),
   runSequence = require('run-sequence'),
   imagemin = require('gulp-imagemin'),
@@ -181,8 +181,9 @@ gulp.task('font', function () {
 gulp.task('jsVendor', function () {
   console.log('---------------COPY JAVASCRIPT FILES INTO DIST---------------');
   return gulp.src([
-      'node_modules/jquery/dist/jquery.js',
-      'node_modules/bootstrap/dist/js/bootstrap.bundle.js'
+      // 'node_modules/jquery/dist/jquery.js',
+      // 'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
+      'src/assets/vendor/js/*',
     ])
     .pipe(gulp.dest('dist/assets/vendor/js'))
     .pipe(browserSync.stream());
@@ -264,7 +265,9 @@ gulp.task('concatScripts', function () {
   console.log('---------------CONCATINATE SCRIPTS---------------');
   return gulp.src([
       'dist/assets/vendor/js/jquery.js',
-      'dist/assets/vendor/js/vendor/bootstrap.bundle.js',
+      'dist/assets/vendor/js/popper.js',
+      'dist/assets/vendor/js/bootstrap.js',
+      // 'dist/assets/vendor/js/*',
       'dist/assets/js/*'
     ])
     .pipe(sourcemaps.init())
@@ -282,7 +285,7 @@ gulp.task('minifyScripts', ['concatScripts'], function () {
     .pipe(removeCode({
       production: true
     }))
-    .pipe(uglify())
+    .pipe(uglify().on('error', console.error))
     .pipe(rename('main.min.js'))
     .pipe(gulp.dest('dist/assets/js'));
 });
@@ -291,8 +294,8 @@ gulp.task('minifyScripts', ['concatScripts'], function () {
 gulp.task('minifyCss', function () {
   console.log('---------------MINIFY CSS---------------');
   return gulp.src([
-      'dist/assets/css/main.css',
-      'dist/assets/vendor/css/**/*'
+      'dist/assets/vendor/css/**/*',
+      'dist/assets/css/main.css'
     ])
     .pipe(sourcemaps.init())
     .pipe(concat('main.css'))

@@ -13067,11 +13067,15 @@ a:hover, a:active, a:focus {
 
 /**
  * Basic typography style for copy text
+ A solution for this problem is percentage. Usually default font-size of the browser is 16px. 
+ Setting font-size: 100% will make 1rem = 16px. But it will make calculations a little difficult. 
+ A better way is to set font-size: 62.5%. Because 62.5% of 16px is 10px. Which makes 1rem = 10px.
+ CALCULATION: Element font size in rem x 16px;
  */
-/* line 4, src/assets/scss/base/_typography.scss */
+/* line 8, src/assets/scss/base/_typography.scss */
 body {
   color: #222222;
-  font: normal 125%/1.4 "Open Sans", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font: normal 100%/1.4 "Open Sans", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 /**
