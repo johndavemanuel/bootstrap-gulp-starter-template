@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
-    "ansi-colors": "^3.2.3",
+    "ansi-colors": "^4.0.1",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
