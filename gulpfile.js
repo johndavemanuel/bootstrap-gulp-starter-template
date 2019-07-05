@@ -89,7 +89,9 @@ gulp.task('resetPages', function() {
 gulp.task('sassLint', function() {
     console.log('---------------SASS LINTING---------------');
     return gulp.src('src/assets/scss/**/*.scss')
-        .pipe(sassLint())
+        .pipe(sassLint({
+            configFile: '.scss-lint.yml' 
+        }))
         .pipe(sassLint.format())
         .pipe(sassLint.failOnError());
 });
@@ -243,7 +245,7 @@ gulp.task('accessibility', function() {
         .pipe(rename({
             extname: '.txt'
         }))
-        .pipe(gulp.dest('accesibility-reports'));
+        .pipe(gulp.dest('accessibility-reports'));
 });
 
 // ------------ PRODUCTION TASKS -------------
