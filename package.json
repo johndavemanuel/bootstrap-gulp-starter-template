@@ -1,5 +1,5 @@
 {
-  "name": "bootstrap4-gulp-starter-template",
+  "name": "bootstrap4-gulp3-starter-template",
   "version": "1.0.0",
   "description": "a bootstrap 4 boiler plate with sass, concatenation, minification, autoprefixer, sourcemaps, browser-sync, git and gulp task runner",
   "main": "index.js",

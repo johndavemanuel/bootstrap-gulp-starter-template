@@ -598,7 +598,8 @@ abbr[data-original-title] {
           text-decoration: underline dotted;
   cursor: help;
   border-bottom: 0;
-  text-decoration-skip-ink: none;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
 }
 
 /* line 119, node_modules/bootstrap/scss/_reboot.scss */
@@ -2918,6 +2919,10 @@ pre code {
   opacity: 1;
 }
 .form-control::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+.form-control:-ms-input-placeholder {
   color: #6c757d;
   opacity: 1;
 }
