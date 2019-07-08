@@ -304,6 +304,9 @@ function minifyCss() {
 // RUN ALL LINTERS
 exports.linters = series(htmlLint, scssLint, JSLint);
 
+// RUN ACCESSIILITY CHECK
+exports.accessibility = HTMLAccessibility;
+
 // DEV
 exports.default = series(cleanDist, font, jsVendor, cssVendor, images, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, parallel(watchHTML, watchImg, watchJS, watchSCSS));
 
