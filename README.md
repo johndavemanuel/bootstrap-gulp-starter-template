@@ -1,4 +1,4 @@
-# BOOTSTRAP 4 + GULP 3 STARTER TEMPLATE
+# BOOTSTRAP + GULP STARTER TEMPLATE
 
 ### NOTE
 
@@ -28,8 +28,8 @@ To use this template, your computer needs:
 
 ### Installing:
 
-- Clone this repo: `git clone https://github.com/johndavemanuel/bootstrap4-gulp-starter-template.git`
-- Navigate into the repo directory: `cd bootstrap4-gulp-starter-template`
+- Clone this repo: `git clone https://github.com/johndavemanuel/bootstrap-gulp-starter-template.git`
+- Navigate into the repo directory: `cd bootstrap-gulp-starter-template`
 - Install all node packages: `npm install`
 - Run `gulp`
 - Your site is now viewable at this URL: http://localhost:3000
