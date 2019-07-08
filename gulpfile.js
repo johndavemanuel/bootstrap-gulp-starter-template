@@ -1,25 +1,19 @@
 // The require statement tells Node to look into the node_modules folder for a package
-// Once the package is found, we assign its contents to the variable
-// gulp.src tells the Gulp task what files to use for the task
-// gulp.dest tells Gulp where to output the files once the task is completed.
-'use strict';
 // Importing specific gulp API functions lets us write them below as series() instead of gulp.series()
-const { src, dest, watch, series, parallel } = require('gulp');
-// const gulp = require('gulp');
+'use strict';
+const {src, dest, watch, series, parallel } = require('gulp');
 const log = require('fancy-log');
 const colors = require('ansi-colors');
 const browserSync = require('browser-sync').create();
 const sass = require('gulp-sass');
 const bourbon = require('node-bourbon').includePaths;
 const cssmin = require('gulp-cssmin');
-const csscomb = require('csscomb');
 const rename = require('gulp-rename');
 const concat = require('gulp-concat');
 const del = require('del');
 const panini = require('panini');
 const uglify = require('gulp-uglify-es').default;
 const sourcemaps = require('gulp-sourcemaps');
-const runSequence = require('run-sequence');
 const imagemin = require('gulp-imagemin');
 const removeCode = require('gulp-remove-code');
 const removeLog = require('gulp-remove-logging');
@@ -34,10 +28,16 @@ const accessibility = require('gulp-accessibility');
 const babel = require('gulp-babel');
 const ghPages = require('gulp-gh-pages');
 
+// File paths
+const files = { 
+  scssPath: 'app/scss/**/*.scss',
+  jsPath: 'app/js/**/*.js'
+}
+
 // ------------ DEVELOPMENT TASKS -------------
 
-// COMPILE SASS INTO CSS
-function sass() {
+// COMPILE SCSS INTO CSS
+function compileSCSS() {
   console.log('---------------COMPILING SCSS---------------');
   return src(['src/assets/scss/main.scss'])
     .pipe(sass({
@@ -51,25 +51,10 @@ function sass() {
     .pipe(browserSync.stream());
 }
 
-gulp.task('sass', function () {
-  console.log('---------------COMPILING SCSS---------------');
-  return gulp.src(['src/assets/scss/main.scss'])
-    .pipe(sass({
-      outputStyle: 'expanded',
-      sourceComments: 'map',
-      sourceMap: 'sass',
-      includePaths: bourbon
-    }).on('error', sass.logError))
-    .pipe(autoprefixer('last 2 versions'))
-    .pipe(gulp.dest('dist/assets/css'))
-    .pipe(browserSync.stream());
-});
-
-
 // USING PANINI, TEMPLATE, PAGE AND PARTIAL FILES ARE COMBINED TO FORM HTML MARKUP
-gulp.task('compile-html', function () {
+function compileHTML() {
   console.log('---------------COMPILING HTML WITH PANINI---------------');
-  return gulp.src('src/pages/**/*.html')
+  return src('src/pages/**/*.html')
     .pipe(panini({
       root: 'src/pages/',
       layouts: 'src/layouts/',
@@ -81,42 +66,41 @@ gulp.task('compile-html', function () {
       helpers: 'src/helpers/',
       data: 'src/data/'
     }))
-    .pipe(gulp.dest('dist'));
-});
+    .pipe(dest('dist'));
+}
 
 // COPY CUSTOM JS
-gulp.task('compile-js', function () {
+function compileJS() {
   console.log('---------------COMPILE CUSTOM.JS---------------');
-  return gulp.src(['src/assets/js/custom.js'])
+  return src(['src/assets/js/custom.js'])
     .pipe(babel())
-    .pipe(gulp.dest('dist/assets/js/'));
-});
-
+    .pipe(dest('dist/assets/js/'));
+}
 
 // RESET PANINI'S CACHE OF LAYOUTS AND PARTIALS
-gulp.task('resetPages', function () {
+function resetPages(done) {
   console.log('---------------CLEARING PANINI CACHE---------------');
   panini.refresh();
-});
-
+  done();
+}
 
 // SASS LINT
-gulp.task('sassLint', function () {
+function scssLint() {
   console.log('---------------SASS LINTING---------------');
-  return gulp.src('src/assets/scss/**/*.scss')
+  return src('src/assets/scss/**/*.scss')
     .pipe(sassLint({
       configFile: '.scss-lint.yml'
     }))
     .pipe(sassLint.format())
     .pipe(sassLint.failOnError());
-});
+}
 
 // HTML LINTER
-gulp.task('htmlLint', function () {
+function htmlLint() {
   console.log('---------------HTML LINTING---------------');
-  return gulp.src('dist/*.html')
+  return src('dist/*.html')
     .pipe(htmllint({}, htmllintReporter));
-});
+}
 
 function htmllintReporter(filepath, issues) {
   if (issues.length > 0) {
@@ -130,126 +114,123 @@ function htmllintReporter(filepath, issues) {
 }
 
 // JS LINTER
-gulp.task('jsLint', function () {
-  return gulp.src('src/assets/js/*.js')
+function JSLint() {
+  return src('src/assets/js/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
-});
+}
 
 
-// RUN ALL LINTERS
-gulp.task('linters', ['htmlLint', 'sassLint', 'jsLint'], function () {
-  console.log('---------------DONE ALL LINTERS---------------');
-});
+function watchHTML(){
+  watch('src/**/*.html', series(resetPages, compileHTML, browserSync.reload));
+}
 
+function watchSCSS(){
+  watch('src/assets/scss/**/*', series(compileSCSS, browserSync.reload));
+}
 
-// WATCHES FOR CHANGES WHILE GULP IS RUNNING
-gulp.task('watch', ['sass', 'browserSyncInit'], function () {
-  console.log('---------------WATCHING FOR CHANGES---------------');
-  gulp.watch(['src/**/*.html'], ['resetPages', 'compile-html', browserSync.reload]);
-  gulp.watch(['src/assets/scss/**/*'], ['sass', browserSync.reload]);
-  gulp.watch(['src/assets/js/*.js'], ['compile-js', browserSync.reload]);
-  gulp.watch(['src/assets/img/**/*'], ['images', browserSync.reload]);
-});
+function watchJS(){
+  watch('src/assets/js/*.js', series(compileJS, browserSync.reload));
+}
 
+function watchImg(){
+  watch('src/assets/img/**/*', series(images, browserSync.reload));
+}
 
 // BROWSER SYNC
-gulp.task('browserSyncInit', function () {
+function browserSyncInit(done) {
   console.log('---------------BROWSER SYNC---------------');
   browserSync.init({
     server: './dist'
   });
-});
+  return done();
+}
 
 // DEPLOY TO GIT 
-gulp.task('deploy', function () {
-  return gulp.src('/*')
+function deploy() {
+  return src('/*')
     .pipe(ghPages({
       remoteUrl: 'https://github.com/johndavemanuel/bootstrap4-gulp-starter-template.git',
       branch: 'master',
       message: 'Automated update of contents via gulp'
     }));
-});
+}
 
 // ------------ OPTIMIZATION TASKS -------------
 
 // COPIES AND MINIFY IMAGE TO DIST
-gulp.task('images', function () {
+function images() {
   console.log('---------------OPTIMIZING IMAGES---------------');
-  return gulp.src('src/assets/img/**/*.+(png|jpg|jpeg|gif|svg)')
+  return src('src/assets/img/**/*.+(png|jpg|jpeg|gif|svg)')
     .pipe(newer('dist/assets/img/'))
     .pipe(imagemin())
-    .pipe(gulp.dest('dist/assets/img/'));
-});
-
+    .pipe(dest('dist/assets/img/'));
+}
 
 // PLACES FONT FILES IN THE DIST FOLDER
-gulp.task('font', function () {
+function font() {
   console.log('---------------COPYING FONTS INTO DIST FOLDER---------------');
-  return gulp.src([
+  return src([
       'src/assets/font/*',
     ])
-    .pipe(gulp.dest('dist/assets/fonts'))
+    .pipe(dest('dist/assets/fonts'))
     .pipe(browserSync.stream());
-});
+}
 
 // COPY JS VENDOR FILES
-gulp.task('jsVendor', function () {
-  console.log('---------------COPY JAVASCRIPT FILES INTO DIST---------------');
-  return gulp.src([
+function jsVendor() {
+  console.log('---------------COPY JAVASCRIPT VENDOR FILES INTO DIST---------------');
+  return src([
       // 'node_modules/jquery/dist/jquery.js',
       // 'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
       'src/assets/vendor/js/*',
     ])
-    .pipe(gulp.dest('dist/assets/vendor/js'))
+    .pipe(dest('dist/assets/vendor/js'))
     .pipe(browserSync.stream());
-});
-
+}
 
 // COPY CSS VENDOR FILES
-gulp.task('cssVendor', function () {
-  console.log('---------------COPY CSS FILES INTO DIST---------------');
-  return gulp.src([
+function cssVendor() {
+  console.log('---------------COPY CSS VENDOR FILES INTO DIST---------------');
+  return src([
       'src/assets/vendor/css/*',
     ])
-    .pipe(gulp.dest('dist/assets/vendor/css'))
+    .pipe(dest('dist/assets/vendor/css'))
     .pipe(browserSync.stream());
-});
-
+}
 
 // PRETTIFY HTML FILES
-gulp.task('prettyHTML', function () {
+function prettyHTML() {
   console.log('---------------HTML PRETTIFY---------------');
-  return gulp.src('dist/*.html')
+  return src('dist/*.html')
     .pipe(prettyHtml({
       indent_size: 4,
       indent_char: ' ',
       unformatted: ['code', 'pre', 'em', 'strong', 'span', 'i', 'b', 'br']
     }))
-    .pipe(gulp.dest('dist'));
-});
-
+    .pipe(dest('dist'));
+}
 
 // DELETE DIST FOLDER
-gulp.task('clean:dist', function () {
+function cleanDist(done) {
   console.log('---------------REMOVING OLD FILES FROM DIST---------------');
-  return del.sync('dist');
-});
-
+  del.sync('dist');
+  return done();
+}
 
 // CREATE DOCS FOLDER FOR DEMO
-gulp.task('docs', function () {
+function docs() {
   console.log('---------------CREATING DOCS---------------');
-  return gulp.src([
+  return src([
       'dist/**/*',
     ])
-    .pipe(gulp.dest('docs'))
+    .pipe(dest('docs'))
     .pipe(browserSync.stream());
-});
+}
 
 // ACCESSIBILITY CHECK
-gulp.task('accessibility', function () {
-  return gulp.src('dist/*.html')
+function HTMLAccessibility() {
+  return src('dist/*.html')
     .pipe(accessibility({
       force: true
     }))
@@ -260,26 +241,26 @@ gulp.task('accessibility', function () {
     .pipe(rename({
       extname: '.txt'
     }))
-    .pipe(gulp.dest('accessibility-reports'));
-});
+    .pipe(dest('accessibility-reports'));
+}
 
 // ------------ PRODUCTION TASKS -------------
 
-// CHANGE TO MINIFIED VERSIONS
-gulp.task('renameSources', function () {
+// CHANGE TO MINIFIED VERSIONS OF JS AND CSS
+function renameSources() {
   console.log('---------------RENAMING SOURCES---------------');
-  return gulp.src('dist/*.html')
+  return src('dist/*.html')
     .pipe(htmlreplace({
       'js': 'assets/js/main.min.js',
       'css': 'assets/css/main.min.css'
     }))
-    .pipe(gulp.dest('dist/'));
-});
+    .pipe(dest('dist/'));
+}
 
-// CONCATINATE SCRIPTS
-gulp.task('concatScripts', function () {
+// CONCATINATE JS SCRIPTS
+function concatScripts() {
   console.log('---------------CONCATINATE SCRIPTS---------------');
-  return gulp.src([
+  return src([
       'dist/assets/vendor/js/jquery.js',
       'dist/assets/vendor/js/popper.js',
       'dist/assets/vendor/js/bootstrap.js',
@@ -288,27 +269,27 @@ gulp.task('concatScripts', function () {
     .pipe(sourcemaps.init())
     .pipe(concat('main.js'))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('dist/assets/vendor/js'))
+    .pipe(dest('dist/assets/vendor/js'))
     .pipe(browserSync.stream());
-});
+}
 
 // MINIFY SCRIPTS
-gulp.task('minifyScripts', ['concatScripts'], function () {
+function minifyScripts() {
   console.log('---------------MINIFY SCRIPTS---------------');
-  return gulp.src('dist/assets/vendor/js/main.js')
+  return src('dist/assets/vendor/js/main.js')
     .pipe(removeLog())
     .pipe(removeCode({
       production: true
     }))
     .pipe(uglify().on('error', console.error))
     .pipe(rename('main.min.js'))
-    .pipe(gulp.dest('dist/assets/js'));
-});
+    .pipe(dest('dist/assets/js'));
+}
 
 // MINIFY CSS
-gulp.task('minifyCss', function () {
+function minifyCss() {
   console.log('---------------MINIFY CSS---------------');
-  return gulp.src([
+  return src([
       'dist/assets/vendor/css/**/*',
       'dist/assets/css/main.css'
     ])
@@ -317,17 +298,14 @@ gulp.task('minifyCss', function () {
     .pipe(sourcemaps.write('./'))
     .pipe(cssmin())
     .pipe(rename('main.min.css'))
-    .pipe(gulp.dest('dist/assets/css'));
-});
+    .pipe(dest('dist/assets/css'));
+}
 
+// RUN ALL LINTERS
+exports.linters = series(htmlLint, scssLint, JSLint);
 
-// ------------ BUILD SEQUENCE -------------
+// DEV
+exports.default = series(cleanDist, font, jsVendor, cssVendor, images, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, parallel(watchHTML, watchImg, watchJS, watchSCSS));
 
-// SIMPLY RUN 'GULP DEV' IN TERMINAL TO RUN LOCAL SERVER AND WATCH FOR CHANGES
-gulp.task('dev', ['clean:dist', 'font', 'jsVendor', 'cssVendor', 'images', 'compile-html', 'compile-js', 'resetPages', 'prettyHTML', 'watch']);
-
-// CREATES PRODUCTION READY ASSETS IN DIST FOLDER
-gulp.task('build', function () {
-  console.log('---------------BUILDING PRODUCTION READY ASSETS---------------');
-  runSequence('clean:dist', 'sass', ['jsVendor', 'cssVendor', 'images', 'font', 'compile-js', 'compile-html'], 'minifyScripts', 'minifyCss', 'renameSources', 'prettyHTML', 'browserSyncInit', 'docs');
-});
+// PROD
+exports.prod = series(cleanDist, compileSCSS, font, jsVendor, cssVendor, images, compileHTML, compileJS, concatScripts, minifyScripts, minifyCss, renameSources, prettyHTML, docs, browserSyncInit);
