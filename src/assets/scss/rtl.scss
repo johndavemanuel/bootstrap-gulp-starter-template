@@ -1,0 +1,11 @@
+@import 'vendors/directional';
+// $dir: rtl;
+$dir: ltr;
+
+.jumbotron {
+    direction: $dir;
+    text-align: $left;
+    margin: side-values(0 2em 0 1em);
+    padding-#{$right}: 1em;
+    margin: 0 if-ltr(!important);
+}

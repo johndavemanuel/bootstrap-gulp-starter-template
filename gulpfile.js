@@ -39,11 +39,11 @@ const files = {
 // COMPILE SCSS INTO CSS
 function compileSCSS() {
   console.log('---------------COMPILING SCSS---------------');
-  return src(['src/assets/scss/main.scss'])
+  return src(['src/assets/scss/main.scss', 'src/assets/scss/rtl.scss'])
     .pipe(sass({
       outputStyle: 'expanded',
       sourceComments: 'map',
-      sourceMap: 'sass',
+      sourceMap: 'scss',
       includePaths: bourbon
     }).on('error', sass.logError))
     .pipe(autoprefixer('last 2 versions'))
@@ -126,7 +126,7 @@ function watchHTML(){
 }
 
 function watchSCSS(){
-  watch('src/assets/scss/**/*', series(compileSCSS, browserSync.reload));
+  watch(['src/assets/scss/**/*.scss', 'src/assets/scss/*.scss'] , series(compileSCSS, browserSync.reload));
 }
 
 function watchJS(){
