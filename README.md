@@ -1,10 +1,10 @@
 # BOOTSTRAP + GULP STARTER TEMPLATE
 
-### NOTE
+### Note
 
 The `docs` folder is for demo purposes only.
 
-Changes should be commited to src/ files only!
+Changes should be commited to `src/` files only.
 
 ### How to use
 
@@ -20,7 +20,7 @@ The template is built with Sass and Gulp build system with these features:
 
 To use this template, your computer needs:
 
--	Node.js is used to run the build processes. https://nodejs.org/en/download/ 
+-	Node.js is used to run the build processes. https://nodejs.org/en/download/
 -   Test: run ` node -v ` in the terminal
 -	Npm (Node comes with npm installed so you should have a version of npm.) Used to manage development dependencies.
 -   Test: run ` npm -v`  in the terminal
@@ -33,27 +33,26 @@ To use this template, your computer needs:
 - Clone this repo: `git clone https://github.com/johndavemanuel/bootstrap-gulp-starter-template.git`
 - Navigate into the repo directory: `cd bootstrap-gulp-starter-template`
 - Install all node packages: `npm install`
-- Run `gulp`
+- Run `gulp dev`
 - Your site is now viewable at this URL: http://localhost:3000
-- To create compressed, production-ready assets run `gulp build`. This will delete everything in the dist folder and recreate all of your complied files. Never make updates directly into the dist folder as these files get overridden each time. Note: The dist folder is not kept in source control.
+- To create compressed, production-ready assets run `gulp prod`. This will delete everything in the dist folder and recreate all of your complied files. Never make updates directly into the dist folder as these files get overridden each time. Note: The dist folder is not kept in source control.
 
 
 ### Folder Structure:
 
-- `dist/`: Compiled files. Note: Do not modify anything in this directory. Your changes will be overridden every time you run the build command. 
-- `node_modules` Front-end dependencies.
-- `src/` Folder contains all of your core, working files—static assets, pages, templates, etc. These assets are compiled to a distribution folder. This is a completely static HTML site. 
-- `src/assets/` Sass files, JS files, images, and fonts go here.
-- `src/data/` External data.
-- `src/layouts/` HTML layouts (templates).
-- `src/pages/` Site pages.
-- `src/partials/` Handlebars partials.
-- `reports` txt file for accessibility issues
-- `gulpfile.js` Task definitions.
-- `package.json` Handles the front-end dependencies.
-- `.htmllintrc` Handles the HTML lint rules.
-- `.sass-lint.yml` Handles the SASS lint rules.
-
+- `dist/` - compiled distribution files
+- `node_modules` - front-end dependencies
+- `src/` - contains all of your core, working files—static assets, pages, templates, etc
+- `src/assets/` - scss files, JS files, images, and fonts are here
+- `src/data/` - external data
+- `src/layouts/` - HTML layouts templates
+- `src/pages/` - site pages
+- `src/partials/` - handlebars partials files.
+- `gulpfile.js` - all task definitions
+- `package.json` - handles the front-end dependencies
+- `.htmllintrc` - handles the HTML lint rules
+- `.sass-lint.yml` - handles the SCSS lint rules
+- `reports` - txt generated file for accessibility issues
 
 ### Gulp Plugins:
 - [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer)
