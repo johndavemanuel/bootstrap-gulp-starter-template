@@ -117,7 +117,7 @@ function htmllintReporter(filepath, issues) {
 }
 
 // JS LINTER
-function JSLint() {
+function jsLint() {
   return src('src/assets/js/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
@@ -128,7 +128,7 @@ function watchFiles() {
   watch('src/**/*.html', compileHTML);
   watch(['src/assets/scss/**/*.scss', 'src/assets/scss/*.scss'] , compileSCSS);
   watch('src/assets/js/*.js', compileJS);
-  watch('src/assets/img/**/*', images);
+  watch('src/assets/img/**/*', copyImages);
 }
 
 
@@ -147,14 +147,14 @@ function deploy() {
     .pipe(ghPages({
       remoteUrl: 'https://github.com/johndavemanuel/bootstrap4-gulp-starter-template.git',
       branch: 'master',
-      message: 'Automated update of contents via gulp'
+      message: 'Automated push of contents via gulp'
     }));
 }
 
 // ------------ OPTIMIZATION TASKS -------------
 
 // COPIES AND MINIFY IMAGE TO DIST
-function images() {
+function copyImages() {
   console.log('---------------OPTIMIZING IMAGES---------------');
   return src('src/assets/img/**/*.+(png|jpg|jpeg|gif|svg)')
     .pipe(newer('dist/assets/img/'))
@@ -164,7 +164,7 @@ function images() {
 }
 
 // PLACES FONT FILES IN THE DIST FOLDER
-function font() {
+function copyFont() {
   console.log('---------------COPYING FONTS INTO DIST FOLDER---------------');
   return src([
       'src/assets/font/*',
@@ -213,7 +213,7 @@ function cleanDist(done) {
 }
 
 // CREATE DOCS FOLDER FOR DEMO
-function docs() {
+function generateDocs() {
   console.log('---------------CREATING DOCS---------------');
   return src([
       'dist/**/*',
@@ -255,22 +255,22 @@ function renameSources() {
 function concatScripts() {
   console.log('---------------CONCATINATE SCRIPTS---------------');
   return src([
-      'dist/assets/vendor/js/jquery.js',
-      'dist/assets/vendor/js/popper.js',
-      'dist/assets/vendor/js/bootstrap.js',
-      'dist/assets/js/*'
+      'src/assets/vendor/js/jquery.js',
+      'src/assets/vendor/js/popper.js',
+      'src/assets/vendor/js/bootstrap.js',
+      'src/assets/js/*'
     ])
     .pipe(sourcemaps.init())
     .pipe(concat('main.js'))
     .pipe(sourcemaps.write('./'))
-    .pipe(dest('dist/assets/vendor/js'))
+    .pipe(dest('dist/assets/js'))
     .pipe(browserSync.stream());
 }
 
 // MINIFY SCRIPTS
 function minifyScripts() {
   console.log('---------------MINIFY SCRIPTS---------------');
-  return src('dist/assets/vendor/js/main.js')
+  return src('dist/assets/js/main.js')
     .pipe(removeLog())
     .pipe(removeCode({
       production: true
@@ -284,7 +284,7 @@ function minifyScripts() {
 function minifyCss() {
   console.log('---------------MINIFY CSS---------------');
   return src([
-      'dist/assets/vendor/css/**/*',
+      'src/assets/vendor/css/**/*',
       'dist/assets/css/main.css'
     ])
     .pipe(sourcemaps.init())
@@ -296,13 +296,13 @@ function minifyCss() {
 }
 
 // RUN ALL LINTERS
-exports.linters = series(htmlLint, scssLint, JSLint);
+exports.linters = series(htmlLint, scssLint, jsLint);
 
 // RUN ACCESSIILITY CHECK
 exports.accessibility = HTMLAccessibility;
 
 // DEV
-exports.dev = series(cleanDist, font, jsVendor, cssVendor, images, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, watchFiles);
+exports.dev = series(cleanDist, copyFont, jsVendor, cssVendor, copyImages, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, watchFiles);
 
 // PROD
-exports.prod = series(cleanDist, compileSCSS, font, jsVendor, cssVendor, images, compileHTML, compileJS, concatScripts, minifyScripts, minifyCss, renameSources, prettyHTML, docs, browserSyncInit);
+exports.prod = series(cleanDist, compileSCSS, copyFont, copyImages, compileHTML, concatScripts, minifyScripts, minifyCss, renameSources, prettyHTML, generateDocs, browserSyncInit);
