@@ -29,7 +29,7 @@ const babel = require('gulp-babel');
 const ghPages = require('gulp-gh-pages');
 
 // File paths
-const files = { 
+const files = {
   scssPath: 'app/scss/**/*.scss',
   jsPath: 'app/js/**/*.js'
 }
@@ -54,6 +54,7 @@ function compileSCSS() {
 // USING PANINI, TEMPLATE, PAGE AND PARTIAL FILES ARE COMBINED TO FORM HTML MARKUP
 function compileHTML() {
   console.log('---------------COMPILING HTML WITH PANINI---------------');
+  panini.refresh();
   return src('src/pages/**/*.html')
     .pipe(panini({
       root: 'src/pages/',
@@ -66,7 +67,8 @@ function compileHTML() {
       helpers: 'src/helpers/',
       data: 'src/data/'
     }))
-    .pipe(dest('dist'));
+    .pipe(dest('dist'))
+    .pipe(browserSync.stream());
 }
 
 // COPY CUSTOM JS
@@ -74,7 +76,8 @@ function compileJS() {
   console.log('---------------COMPILE CUSTOM.JS---------------');
   return src(['src/assets/js/custom.js'])
     .pipe(babel())
-    .pipe(dest('dist/assets/js/'));
+    .pipe(dest('dist/assets/js/'))
+    .pipe(browserSync.stream());
 }
 
 // RESET PANINI'S CACHE OF LAYOUTS AND PARTIALS
@@ -120,22 +123,14 @@ function JSLint() {
     .pipe(jshint.reporter('default'));
 }
 
-
-function watchHTML(){
-  watch('src/**/*.html', series(resetPages, compileHTML, browserSync.reload));
+// WATCH FILES
+function watchFiles() {
+  watch('src/**/*.html', compileHTML);
+  watch(['src/assets/scss/**/*.scss', 'src/assets/scss/*.scss'] , compileSCSS);
+  watch('src/assets/js/*.js', compileJS);
+  watch('src/assets/img/**/*', images);
 }
 
-function watchSCSS(){
-  watch(['src/assets/scss/**/*.scss', 'src/assets/scss/*.scss'] , series(compileSCSS, browserSync.reload));
-}
-
-function watchJS(){
-  watch('src/assets/js/*.js', series(compileJS, browserSync.reload));
-}
-
-function watchImg(){
-  watch('src/assets/img/**/*', series(images, browserSync.reload));
-}
 
 // BROWSER SYNC
 function browserSyncInit(done) {
@@ -146,7 +141,7 @@ function browserSyncInit(done) {
   return done();
 }
 
-// DEPLOY TO GIT 
+// DEPLOY TO GIT
 function deploy() {
   return src('/*')
     .pipe(ghPages({
@@ -164,7 +159,8 @@ function images() {
   return src('src/assets/img/**/*.+(png|jpg|jpeg|gif|svg)')
     .pipe(newer('dist/assets/img/'))
     .pipe(imagemin())
-    .pipe(dest('dist/assets/img/'));
+    .pipe(dest('dist/assets/img/'))
+    .pipe(browserSync.stream());
 }
 
 // PLACES FONT FILES IN THE DIST FOLDER
@@ -181,8 +177,6 @@ function font() {
 function jsVendor() {
   console.log('---------------COPY JAVASCRIPT VENDOR FILES INTO DIST---------------');
   return src([
-      // 'node_modules/jquery/dist/jquery.js',
-      // 'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
       'src/assets/vendor/js/*',
     ])
     .pipe(dest('dist/assets/vendor/js'))
@@ -308,7 +302,7 @@ exports.linters = series(htmlLint, scssLint, JSLint);
 exports.accessibility = HTMLAccessibility;
 
 // DEV
-exports.default = series(cleanDist, font, jsVendor, cssVendor, images, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, parallel(watchHTML, watchImg, watchJS, watchSCSS));
+exports.dev = series(cleanDist, font, jsVendor, cssVendor, images, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, watchFiles);
 
 // PROD
 exports.prod = series(cleanDist, compileSCSS, font, jsVendor, cssVendor, images, compileHTML, compileJS, concatScripts, minifyScripts, minifyCss, renameSources, prettyHTML, docs, browserSyncInit);
