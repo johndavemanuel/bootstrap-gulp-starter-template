@@ -46,6 +46,6 @@ node_modules/
 ### Package lock ###
 package-lock.json
 
+### Custom Files ###
 dist/
 accessibility-reports/
-gulpv3.js
