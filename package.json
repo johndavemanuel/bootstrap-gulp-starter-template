@@ -30,7 +30,7 @@
     "gulp-gh-pages": "^0.5.4",
     "gulp-html-replace": "^1.6.2",
     "gulp-htmllint": "0.0.16",
-    "gulp-imagemin": "^6.0.0",
+    "gulp-imagemin": "^7.1.0",
     "gulp-jshint": "^2.1.0",
     "gulp-newer": "^1.4.0",
     "gulp-pretty-html": "^2.0.9",
