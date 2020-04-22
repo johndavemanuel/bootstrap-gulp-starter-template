@@ -87,9 +87,9 @@ function resetPages(done) {
   done();
 }
 
-// SASS LINT
+// SCSS LINT
 function scssLint() {
-  console.log('---------------SASS LINTING---------------');
+  console.log('---------------SCSS LINTING---------------');
   return src('src/assets/scss/**/*.scss')
     .pipe(sassLint({
       configFile: '.scss-lint.yml'
