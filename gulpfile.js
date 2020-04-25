@@ -101,7 +101,7 @@ function scssLint() {
 // HTML LINTER
 function htmlLint() {
   console.log('---------------HTML LINTING---------------');
-  return src('dist/*.html')
+  return src('dist/**/*.html')
     .pipe(htmllint({}, htmllintReporter));
 }
 
@@ -196,7 +196,7 @@ function cssVendor() {
 // PRETTIFY HTML FILES
 function prettyHTML() {
   console.log('---------------HTML PRETTIFY---------------');
-  return src('dist/*.html')
+  return src('dist/**/*.html')
     .pipe(prettyHtml({
       indent_size: 4,
       indent_char: ' ',
@@ -224,7 +224,7 @@ function generateDocs() {
 
 // ACCESSIBILITY CHECK
 function HTMLAccessibility() {
-  return src('dist/*.html')
+  return src('dist/**/*.html')
     .pipe(accessibility({
       force: true
     }))
@@ -243,10 +243,10 @@ function HTMLAccessibility() {
 // CHANGE TO MINIFIED VERSIONS OF JS AND CSS
 function renameSources() {
   console.log('---------------RENAMING SOURCES---------------');
-  return src('dist/*.html')
+  return src('dist/**/*.html')
     .pipe(htmlreplace({
-      'js': 'assets/js/main.min.js',
-      'css': 'assets/css/main.min.css'
+      'js': '../assets/js/main.min.js',
+      'css': '../assets/css/main.min.css'
     }))
     .pipe(dest('dist/'));
 }
