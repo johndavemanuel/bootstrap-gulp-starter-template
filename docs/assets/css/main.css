@@ -14445,18 +14445,13 @@ html {
           box-sizing: border-box;
 }
 
-/* line 13, src/assets/scss/base/_base.scss */
-body {
-  padding-top: 70px;
-}
-
 /**
  * Make all elements from the DOM inherit from the parent box-sizing
  * Since `*` has a specificity of 0, it does not override the `html` value
  * making all elements inheriting from the root box-sizing value
  * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
  */
-/* line 24, src/assets/scss/base/_base.scss */
+/* line 18, src/assets/scss/base/_base.scss */
 *,
 *::before,
 *::after {
@@ -14467,7 +14462,7 @@ body {
 /**
  * Basic styles for links
  */
-/* line 33, src/assets/scss/base/_base.scss */
+/* line 27, src/assets/scss/base/_base.scss */
 a {
   color: #f05555;
   text-decoration: none;

@@ -75,7 +75,7 @@ function compileHTML() {
 // COPY CUSTOM JS
 function compileJS() {
   log(chalk.red.bold('---------------COMPILE CUSTOM.JS---------------'));
-  return src(['src/assets/js/*.js'])
+  return src(['src/assets/js/**/*.js'])
     .pipe(babel())
     .pipe(dest('dist/assets/js/'))
     .pipe(browserSync.stream());
@@ -259,6 +259,8 @@ function concatScripts() {
       'src/assets/vendor/js/jquery.js',
       'src/assets/vendor/js/popper.js',
       'src/assets/vendor/js/bootstrap.js',
+      'src/assets/js/util/autoPadding.js',
+      'src/assets/js/util/crossPlatform.js',
       'src/assets/js/*'
     ])
     .pipe(sourcemaps.init())
