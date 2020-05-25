@@ -297,13 +297,13 @@ function minifyCss() {
 }
 
 // DEVELOPMENT
-exports.dev = series(cleanDist, copyFont, jsVendor, cssVendor, copyImages, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, watchFiles);
+exports.development = series(cleanDist, copyFont, jsVendor, cssVendor, copyImages, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, watchFiles);
 
 // PRODUCTION
-exports.prod = series(cleanDist, compileSCSS, copyFont, copyImages, compileHTML, concatScripts, minifyScripts, minifyCss, renameSources, prettyHTML, generateDocs, browserSyncInit);
+exports.production = series(cleanDist, compileSCSS, copyFont, copyImages, compileHTML, concatScripts, minifyScripts, minifyCss, renameSources, prettyHTML, generateDocs, browserSyncInit);
 
 // RUN ALL LINTERS
-exports.linters = series(htmlLint, scssLint, jsLint);
+exports.lint = series(htmlLint, scssLint, jsLint);
 
 // RUN ACCESSIILITY CHECK
-exports.accessibility = HTMLAccessibility;
+exports.a11y = HTMLAccessibility;
