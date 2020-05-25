@@ -246,8 +246,8 @@ function renameSources() {
   log(chalk.red.bold('---------------RENAMING SOURCES---------------'));
   return src('dist/**/*.html')
     .pipe(htmlreplace({
-      'js': '../assets/js/main.min.js',
-      'css': '../assets/css/main.min.css'
+      'js': 'assets/js/main.min.js',
+      'css': 'assets/css/main.min.css'
     }))
     .pipe(dest('dist/'));
 }
