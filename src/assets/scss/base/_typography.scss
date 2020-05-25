@@ -1,11 +1,172 @@
 /**
  * Basic typography style for copy text
- A solution for this problem is percentage. Usually default font-size of the browser is 16px. 
- Setting font-size: 100% will make 1rem = 16px. But it will make calculations a little difficult. 
+ A solution for this problem is percentage. Usually default font-size of the browser is 16px.
+ Setting font-size: 100% will make 1rem = 16px. But it will make calculations a little difficult.
  A better way is to set font-size: 62.5%. Because 62.5% of 16px is 10px. Which makes 1rem = 10px.
  CALCULATION: Element font size in rem x 16px;
  */
-  body {
-    color: $text-color;
-    font: normal 100% / 1.4 $text-font-stack;
+
+ // Body text
+// -------------------------
+
+// html {
+//   font-size: 62.5%;
+// }
+
+body {
+  font-size: 0.875rem;
+  font-weight: $font-weight-light;
+  font-family: $font-family-heebo;
+  letter-spacing: 0.4px;
+  line-height: 1.5rem;
+  color: $body-color;
+
+  @include media-breakpoint-up(lg) {
+    @include font-size(1rem);
   }
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-bottom: 28px;
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 36px;
+  }
+}
+
+ol,
+ul,
+p,
+blockquote,
+.preamble {
+  margin-bottom: 28px;
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 36px;
+  }
+}
+
+// Headings
+// -------------------------
+h1,
+h2,
+h3,
+h4,
+.h1,
+.h2,
+.h3,
+.h4 {
+  font-family: $font-family-playfair;
+}
+
+h5,
+h6,
+.h5,
+.h6 {
+  font-family: $font-family-heebo;
+}
+
+h1,
+.h1 {
+  color: $text-color-1;
+  font-size: $h1-font-size-touch;
+  font-weight: $font-weight-normal;
+  line-height: $h1-line-height-touch;
+  letter-spacing: 0.13px;
+  text-transform: uppercase;
+
+  @include media-breakpoint-up(lg) {
+    @include font-size($h1-font-size);
+    letter-spacing: 0.22px;
+    line-height: $h1-line-height;
+  }
+}
+
+h2,
+.h2 {
+  color: $text-color-1;
+  font-size: $h2-font-size-touch;
+  font-weight: $font-weight-normal;
+  letter-spacing: 0.08px;
+  line-height: $h2-line-height-touch;
+  text-transform: initial;
+
+  @include media-breakpoint-up(lg) {
+    @include font-size($h2-font-size);
+    letter-spacing: 0.14px;
+    line-height: $h2-line-height;
+  }
+}
+
+h3,
+.h3 {
+  color: $text-color-1;
+  font-size: $h3-font-size-touch;
+  font-weight: $font-weight-normal;
+  letter-spacing: 0.06px;
+  line-height: $h3-line-height-touch;
+  text-transform: initial;
+
+  @include media-breakpoint-up(lg) {
+    @include font-size($h3-font-size);
+    letter-spacing: 0.08px;
+    line-height: $h3-line-height;
+  }
+}
+
+h4,
+.h4 {
+  color: $text-color-1;
+  font-size: $h4-font-size-touch;
+  font-weight: $font-weight-normal;
+  letter-spacing: 0.05px;
+  line-height: $h4-line-height-touch;
+  text-transform: uppercase;
+
+  @include media-breakpoint-up(lg) {
+    @include font-size($h4-font-size);
+    line-height: $h4-line-height;
+  }
+}
+
+h5,
+.h5 {
+  color: $text-color-1;
+  font-size: $h5-font-size-touch;
+  font-weight: $font-weight-bold;
+  letter-spacing: normal;
+  line-height: $h5-line-height-touch;
+  text-transform: initial;
+
+  @include media-breakpoint-up(lg) {
+    @include font-size($h5-font-size);
+    line-height: $h5-line-height;
+  }
+}
+
+h6,
+.h6 {
+  color: $text-color-1;
+  font-size: $h6-font-size-touch;
+  font-weight: $font-weight-bold;
+  letter-spacing: normal;
+  line-height: $h6-line-height-touch;
+  text-transform: initial;
+
+  @include media-breakpoint-up(lg) {
+    @include font-size($h6-font-size);
+    line-height: $h6-line-height;
+  }
+}

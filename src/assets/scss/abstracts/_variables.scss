@@ -1,48 +1,91 @@
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
-/// Regular font family
-/// @type List
-$text-font-stack: 'Open Sans',
-'Helvetica Neue Light',
-'Helvetica Neue',
-'Helvetica',
-'Arial',
-sans-serif !default;
-/// Code (monospace) font family
-/// @type List
-$code-font-stack: 'Courier New',
-'DejaVu Sans Mono',
-'Bitstream Vera Sans Mono',
-'Monaco',
-monospace !default;
-/// Copy text color
-/// @type Color
-$text-color: rgb(34, 34, 34) !default;
-/// Main brand color
-/// @type Color
-$brand-color: rgb(229, 0, 80) !default;
-/// Outline color
-/// @type Color
-$border-outline-color: #f1f1f1;
-/// Light grey
-/// @type Color
-$light-grey: rgb(237, 237, 237) !default;
-/// Medium grey
-/// @type Color
-$mid-grey: rgb(153, 153, 153) !default;
-/// Dark grey
-/// @type Color
-$dark-grey: rgb(68, 68, 68) !default;
-/// Container's maximum width
-/// @type Length
-$max-width: 1180px !default;
-/// Breakpoints map
-/// @prop {String} keys - Keys are identifiers mapped to a given length
-/// @prop {Map} values - Values are actual breakpoints expressed in pixels
-$breakpoints: ( 'small': 320px, 'medium': 768px, 'large': 1024px, ) !default;
-/// Relative or absolute URL where all assets are served from
-/// @type String
-/// @example scss - When using a CDN
-///   $base-url: 'http://cdn.example.com/assets/';
-///   $base-url: '/assets/' !default;
+// https://bootstrapvars.com/4.4/
+
+$red:                         #f05555;
+$gray-100:                    #f7f7f7;
+$gray-200:                    #e4e4e4;
+$gray-900:                    #30302e;
+$beige-100:                   #f0ebe3;
+$primary:                       $gray-900;
+$secondary:                     $beige-100;
+$success:                       $secondary;
+$info:                          $gray-900;
+$warning:                       $primary;
+$danger:                        $red;
+$black:                       #000000;
+
+
+// Text Colors
+$text-color-1:                  #111111;
+$text-color-2:                  $primary;
+$text-color-3:                  $black;
+$text-color-4:                  #031532;
+
+// Font Family
+$font-family-playfair:          "Playfair Display", serif;
+$font-family-heebo:             "Heebo", sans-serif;
+
+// Font Size
+$font-size-base: 1rem;
+
+// Font Weight
+$font-weight-lighter:           lighter;
+$font-weight-light:             300;
+$font-weight-normal:            400;
+$font-weight-medium:            500;
+$font-weight-semibold:          600;
+$font-weight-bold:              700;
+$font-weight-bolder:            800;
+$font-weight-black:             900;
+$font-weight-base:              $font-weight-light;
+$line-height-base:              1.5;
+
+// Header
+$h1-font-size:                  $font-size-base * 4;
+$h2-font-size:                  $font-size-base * 2.4375;
+$h3-font-size:                  $font-size-base * 1.5;
+$h4-font-size:                  $font-size-base * 0.9375;
+$h5-font-size:                  $font-size-base * 0.75;
+$h6-font-size:                  $font-size-base * 0.6875;
+$h1-line-height:                $font-size-base * 4.5;
+$h2-line-height:                $font-size-base * 3;
+$h3-line-height:                $font-size-base * 2.25;
+$h4-line-height:                $font-size-base * 1.5;
+$h5-line-height:                $font-size-base * 1.5;
+$h6-line-height:                $font-size-base * 1.5;
+
+// Header Touch
+$h1-font-size-touch:            $font-size-base * 2.25;
+$h2-font-size-touch:            $font-size-base * 1.5;
+$h3-font-size-touch:            $font-size-base * 1.0625;
+$h4-font-size-touch:            $font-size-base * 0.875;
+$h5-font-size-touch:            $font-size-base * 0.75;
+$h6-font-size-touch:            $font-size-base * 0.6875;
+$h1-line-height-touch:          $font-size-base * 2.5;
+$h2-line-height-touch:          $font-size-base * 2.25;
+$h3-line-height-touch:          $font-size-base * 1.5;
+$h4-line-height-touch:          $font-size-base * 1.5;
+$h5-line-height-touch:          $font-size-base * 1.5;
+$h6-line-height-touch:          $font-size-base * 1.5;
+
+
+// Grid breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1440px
+);
+
+// Grid containers
+$container-max-widths: (
+  sm: 100%,
+  md: 100%,
+  lg: 100%,
+  xl: 1150px,
+  xxl: 1310px
+);

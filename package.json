@@ -4,10 +4,10 @@
   "description": "a bootstrap 4 boiler plate with sass, concatenation, minification, autoprefixer, sourcemaps, browser-sync, git and gulp task runner",
   "main": "index.js",
   "scripts": {
-    "dev": "gulp dev",
-    "prod": "gulp prod",
-    "linters": "gulp linters",
-    "accessibility": "gulp accessibility"
+    "development": "gulp dev",
+    "production": "gulp prod",
+    "linters": "gulp lint",
+    "accessibility": "gulp a11y"
   },
   "author": "johndavemanuel",
   "license": "MIT",
@@ -53,7 +53,8 @@
     "run-sequence": "^2.2.1"
   },
   "dependencies": {
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.5.0",
+    "chalk": "^4.0.0",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7"
   }

@@ -1,8 +1,7 @@
 // The require statement tells Node to look into the node_modules folder for a package
 // Importing specific gulp API functions lets us write them below as series() instead of gulp.series()
 'use strict';
-const {src, dest, watch, series, parallel } = require('gulp');
-const log = require('fancy-log');
+const { src, dest, watch, series, parallel } = require('gulp');
 const colors = require('ansi-colors');
 const browserSync = require('browser-sync').create();
 const sass = require('gulp-sass');
@@ -27,6 +26,8 @@ const autoprefixer = require('gulp-autoprefixer');
 const accessibility = require('gulp-accessibility');
 const babel = require('gulp-babel');
 const ghPages = require('gulp-gh-pages');
+const chalk = require('chalk');
+const log = console.log;
 
 // File paths
 const files = {
@@ -38,7 +39,7 @@ const files = {
 
 // COMPILE SCSS INTO CSS
 function compileSCSS() {
-  console.log('---------------COMPILING SCSS---------------');
+  log(chalk.red.bold('---------------COMPILING SCSS---------------'));
   return src(['src/assets/scss/main.scss', 'src/assets/scss/rtl.scss'])
     .pipe(sass({
       outputStyle: 'expanded',
@@ -53,14 +54,14 @@ function compileSCSS() {
 
 // USING PANINI, TEMPLATE, PAGE AND PARTIAL FILES ARE COMBINED TO FORM HTML MARKUP
 function compileHTML() {
-  console.log('---------------COMPILING HTML WITH PANINI---------------');
+  log(chalk.red.bold('---------------COMPILING HTML WITH PANINI---------------'));
   panini.refresh();
   return src('src/pages/**/*.html')
     .pipe(panini({
       root: 'src/pages/',
       layouts: 'src/layouts/',
       // pageLayouts: {
-      //     // All pages inside src/pages/blog will use the blog.html layout
+           // All pages inside src/pages/blog will use the blog.html layout
       //     'blog': 'blog'
       // }
       partials: 'src/partials/',
@@ -73,8 +74,8 @@ function compileHTML() {
 
 // COPY CUSTOM JS
 function compileJS() {
-  console.log('---------------COMPILE CUSTOM.JS---------------');
-  return src(['src/assets/js/custom.js'])
+  log(chalk.red.bold('---------------COMPILE CUSTOM.JS---------------'));
+  return src(['src/assets/js/*.js'])
     .pipe(babel())
     .pipe(dest('dist/assets/js/'))
     .pipe(browserSync.stream());
@@ -82,14 +83,14 @@ function compileJS() {
 
 // RESET PANINI'S CACHE OF LAYOUTS AND PARTIALS
 function resetPages(done) {
-  console.log('---------------CLEARING PANINI CACHE---------------');
+  log(chalk.red.bold('---------------CLEARING PANINI CACHE---------------'));
   panini.refresh();
   done();
 }
 
 // SCSS LINT
 function scssLint() {
-  console.log('---------------SCSS LINTING---------------');
+  log(chalk.red.bold('---------------SCSS LINTING---------------'));
   return src('src/assets/scss/**/*.scss')
     .pipe(sassLint({
       configFile: '.scss-lint.yml'
@@ -100,7 +101,7 @@ function scssLint() {
 
 // HTML LINTER
 function htmlLint() {
-  console.log('---------------HTML LINTING---------------');
+  log(chalk.red.bold('---------------HTML LINTING---------------'));
   return src('dist/**/*.html')
     .pipe(htmllint({}, htmllintReporter));
 }
@@ -112,7 +113,7 @@ function htmllintReporter(filepath, issues) {
     });
     process.exitCode = 1;
   } else {
-    console.log('---------------NO HTML LINT ERROR---------------');
+    log(chalk.green.bold('---------------NO HTML LINT ERROR---------------'));
   }
 }
 
@@ -134,7 +135,7 @@ function watchFiles() {
 
 // BROWSER SYNC
 function browserSyncInit(done) {
-  console.log('---------------BROWSER SYNC---------------');
+  log(chalk.red.bold('---------------BROWSER SYNC INIT---------------'));
   browserSync.init({
     server: './dist'
   });
@@ -155,7 +156,7 @@ function deploy() {
 
 // COPIES AND MINIFY IMAGE TO DIST
 function copyImages() {
-  console.log('---------------OPTIMIZING IMAGES---------------');
+  log(chalk.red.bold('---------------OPTIMIZING IMAGES---------------'));
   return src('src/assets/img/**/*.+(png|jpg|jpeg|gif|svg)')
     .pipe(newer('dist/assets/img/'))
     .pipe(imagemin())
@@ -165,7 +166,7 @@ function copyImages() {
 
 // PLACES FONT FILES IN THE DIST FOLDER
 function copyFont() {
-  console.log('---------------COPYING FONTS INTO DIST FOLDER---------------');
+  log(chalk.red.bold('---------------COPYING FONTS INTO DIST FOLDER---------------'));
   return src([
       'src/assets/font/*',
     ])
@@ -175,7 +176,7 @@ function copyFont() {
 
 // COPY JS VENDOR FILES
 function jsVendor() {
-  console.log('---------------COPY JAVASCRIPT VENDOR FILES INTO DIST---------------');
+  log(chalk.red.bold('---------------COPY JAVASCRIPT VENDOR FILES INTO DIST---------------'));
   return src([
       'src/assets/vendor/js/*',
     ])
@@ -185,7 +186,7 @@ function jsVendor() {
 
 // COPY CSS VENDOR FILES
 function cssVendor() {
-  console.log('---------------COPY CSS VENDOR FILES INTO DIST---------------');
+  log(chalk.red.bold('---------------COPY CSS VENDOR FILES INTO DIST---------------'));
   return src([
       'src/assets/vendor/css/*',
     ])
@@ -195,7 +196,7 @@ function cssVendor() {
 
 // PRETTIFY HTML FILES
 function prettyHTML() {
-  console.log('---------------HTML PRETTIFY---------------');
+  log(chalk.red.bold('---------------HTML PRETTIFY---------------'));
   return src('dist/**/*.html')
     .pipe(prettyHtml({
       indent_size: 4,
@@ -207,14 +208,14 @@ function prettyHTML() {
 
 // DELETE DIST FOLDER
 function cleanDist(done) {
-  console.log('---------------REMOVING OLD FILES FROM DIST---------------');
+  log(chalk.red.bold('---------------REMOVING OLD FILES FROM DIST---------------'));
   del.sync('dist');
   return done();
 }
 
 // CREATE DOCS FOLDER FOR DEMO
 function generateDocs() {
-  console.log('---------------CREATING DOCS---------------');
+  log(chalk.red.bold('---------------CREATING DOCS---------------'));
   return src([
       'dist/**/*',
     ])
@@ -242,7 +243,7 @@ function HTMLAccessibility() {
 
 // CHANGE TO MINIFIED VERSIONS OF JS AND CSS
 function renameSources() {
-  console.log('---------------RENAMING SOURCES---------------');
+  log(chalk.red.bold('---------------RENAMING SOURCES---------------'));
   return src('dist/**/*.html')
     .pipe(htmlreplace({
       'js': '../assets/js/main.min.js',
@@ -253,7 +254,7 @@ function renameSources() {
 
 // CONCATINATE JS SCRIPTS
 function concatScripts() {
-  console.log('---------------CONCATINATE SCRIPTS---------------');
+  log(chalk.red.bold('---------------CONCATINATE SCRIPTS---------------'));
   return src([
       'src/assets/vendor/js/jquery.js',
       'src/assets/vendor/js/popper.js',
@@ -269,7 +270,7 @@ function concatScripts() {
 
 // MINIFY SCRIPTS
 function minifyScripts() {
-  console.log('---------------MINIFY SCRIPTS---------------');
+  log(chalk.red.bold('---------------MINIFY SCRIPTS---------------'));
   return src('dist/assets/js/main.js')
     .pipe(removeLog())
     .pipe(removeCode({
@@ -282,7 +283,7 @@ function minifyScripts() {
 
 // MINIFY CSS
 function minifyCss() {
-  console.log('---------------MINIFY CSS---------------');
+  log(chalk.red.bold('---------------MINIFY CSS---------------'));
   return src([
       'src/assets/vendor/css/**/*',
       'dist/assets/css/main.css'
@@ -295,14 +296,14 @@ function minifyCss() {
     .pipe(dest('dist/assets/css'));
 }
 
+// DEVELOPMENT
+exports.dev = series(cleanDist, copyFont, jsVendor, cssVendor, copyImages, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, watchFiles);
+
+// PRODUCTION
+exports.prod = series(cleanDist, compileSCSS, copyFont, copyImages, compileHTML, concatScripts, minifyScripts, minifyCss, renameSources, prettyHTML, generateDocs, browserSyncInit);
+
 // RUN ALL LINTERS
 exports.linters = series(htmlLint, scssLint, jsLint);
 
 // RUN ACCESSIILITY CHECK
 exports.accessibility = HTMLAccessibility;
-
-// DEV
-exports.dev = series(cleanDist, copyFont, jsVendor, cssVendor, copyImages, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, watchFiles);
-
-// PROD
-exports.prod = series(cleanDist, compileSCSS, copyFont, copyImages, compileHTML, concatScripts, minifyScripts, minifyCss, renameSources, prettyHTML, generateDocs, browserSyncInit);
