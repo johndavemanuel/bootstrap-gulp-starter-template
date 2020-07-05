@@ -33,9 +33,9 @@ To use this template, your computer needs:
 - Clone this repo: `git clone https://github.com/johndavemanuel/bootstrap-gulp-starter-template.git`
 - Navigate into the repo directory: `cd bootstrap-gulp-starter-template`
 - Install all node packages: `npm install`
-- Run `gulp dev`
+- Run `gulp development`
 - Your site is now viewable at this URL: http://localhost:3000
-- To create compressed, production-ready assets run `gulp prod`. This will delete everything in the dist folder and recreate all of your complied files. Never make updates directly into the dist folder as these files get overridden each time. Note: The dist folder is not kept in source control.
+- To create compressed, production-ready assets run `gulp production`. This will delete everything in the dist folder and recreate all of your complied files. Never make updates directly into the dist folder as these files get overridden each time. Note: The dist folder is not kept in source control.
 
 
 ### Folder Structure:
