@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "tommix95",
+      "name": "tommix95",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/44686328?v=4",
+      "profile": "https://github.com/tommix95",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "bootstrap-gulp-starter-template",
+  "projectOwner": "johndavemanuel",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
