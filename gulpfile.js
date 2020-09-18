@@ -307,5 +307,5 @@ exports.production = series(cleanDist, compileSCSS, copyFont, copyImages, compil
 // RUN ALL LINTERS
 exports.lint = series(htmlLint, scssLint, jsLint);
 
-// RUN ACCESSIILITY CHECK
+// RUN ACCESSIBILITY CHECK
 exports.a11y = HTMLAccessibility;
