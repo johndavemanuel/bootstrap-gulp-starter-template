@@ -96,7 +96,12 @@ To use this template, your computer needs:
 - [Panini](https://github.com/zurb/panini)
 - [Gulp](https://gulpjs.org/getting-started)
 
-## Contributors ✨
+
+### License
+
+[MIT](LICENSE)
+
+### Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
