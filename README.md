@@ -20,7 +20,6 @@ The template is built with Sass and Gulp build system with these features:
 -	Built-in BrowserSync server - will automatically reload your page when files are changed. It also live-injects CSS changes when you save a Sass file. This task runs continuously and defaults to localhost.
 -	For production builds - CSS compression, JavaScript compression, Image compression and more.
 
-
 ### Requirements
 
 To use this template, your computer needs:
@@ -41,9 +40,6 @@ To use this template, your computer needs:
 - Run `gulp development`
 - Your site is now viewable at this URL: http://localhost:3000
 - To create compressed, production-ready assets run `gulp production`. This will delete everything in the dist folder and recreate all of your complied files. Never make updates directly into the dist folder as these files get overridden each time.
-
-
-
 
 ### Folder Structure:
 
@@ -95,7 +91,6 @@ To use this template, your computer needs:
 - [Handlebars](http://handlebarsjs.com/)
 - [Panini](https://github.com/zurb/panini)
 - [Gulp](https://gulpjs.org/getting-started)
-
 
 ### License
 
