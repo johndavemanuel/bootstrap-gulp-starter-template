@@ -49,7 +49,7 @@
     "gulp-uglify-es": "^1.0.4",
     "jshint": "^2.10.1",
     "node-bourbon": "^4.2.8",
-    "panini": "^1.6.3",
+    "panini": "^1.7.1",
     "run-sequence": "^2.2.1",
     "chalk": "^4.0.0"
   },
