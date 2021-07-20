@@ -16,7 +16,7 @@
     "url": "https://github.com/johndavemanuel/bootstrap4-gulp-starter-template"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
+    "@babel/core": "^7.14.8",
     "ansi-colors": "^4.1.1",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
