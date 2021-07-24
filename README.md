@@ -70,6 +70,7 @@ To use this template, your computer needs:
 - [gulp-jshint](https://www.npmjs.com/package/gulp-jshint)
 - [gulp-newer](https://www.npmjs.com/package/gulp-newer)
 - [gulp-pretty-html](https://www.npmjs.com/package/gulp-pretty-html)
+- [gulp-purgecss](https://www.npmjs.com/package/gulp-purgecss)
 - [gulp-remove-code](https://www.npmjs.com/package/gulp-remove-code)
 - [gulp-remove-logging](https://www.npmjs.com/package/gulp-remove-logging)
 - [gulp-rename](https://www.npmjs.com/package/gulp-rename)

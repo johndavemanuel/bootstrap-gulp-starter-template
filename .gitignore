@@ -45,6 +45,7 @@ node_modules/
 
 ### Package lock ###
 package-lock.json
+yarn.lock
 
 ### Custom Files ###
 dist/

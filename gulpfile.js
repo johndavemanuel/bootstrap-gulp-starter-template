@@ -1,7 +1,13 @@
 // The require statement tells Node to look into the node_modules folder for a package
 // Importing specific gulp API functions lets us write them below as series() instead of gulp.series()
 'use strict';
-const { src, dest, watch, series, parallel } = require('gulp');
+const {
+  src,
+  dest,
+  watch,
+  series,
+  parallel
+} = require('gulp');
 const colors = require('ansi-colors');
 const browserSync = require('browser-sync').create();
 const sass = require('gulp-sass');
@@ -26,6 +32,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const accessibility = require('gulp-accessibility');
 const babel = require('gulp-babel');
 const ghPages = require('gulp-gh-pages');
+const purgecss = require('gulp-purgecss')
 const chalk = require('chalk');
 const log = console.log;
 
@@ -61,7 +68,7 @@ function compileHTML() {
       root: 'src/pages/',
       layouts: 'src/layouts/',
       // pageLayouts: {
-           // All pages inside src/pages/blog will use the blog.html layout
+      // All pages inside src/pages/blog will use the blog.html layout
       //     'blog': 'blog'
       // }
       partials: 'src/partials/',
@@ -127,7 +134,7 @@ function jsLint() {
 // WATCH FILES
 function watchFiles() {
   watch('src/**/*.html', compileHTML);
-  watch(['src/assets/scss/**/*.scss', 'src/assets/scss/*.scss'] , compileSCSS);
+  watch(['src/assets/scss/**/*.scss', 'src/assets/scss/*.scss'], compileSCSS);
   watch('src/assets/js/*.js', compileJS);
   watch('src/assets/img/**/*', copyImages);
 }
@@ -283,8 +290,21 @@ function minifyScripts() {
     .pipe(dest('dist/assets/js'));
 }
 
+// PURGE CSS
+function purgeCSS() {
+  log(chalk.red.bold('---------------PURGE CSS---------------'));
+  return src([
+      'dist/assets/css/main.css',
+    ])
+    .pipe(purgecss({
+      content: ['dist/*.html']
+    }))
+    .pipe(dest('dist/assets/css'))
+}
+
+
 // MINIFY CSS
-function minifyCss() {
+function minifyCSS() {
   log(chalk.red.bold('---------------MINIFY CSS---------------'));
   return src([
       'src/assets/vendor/css/**/*',
@@ -302,7 +322,7 @@ function minifyCss() {
 exports.development = series(cleanDist, copyFont, jsVendor, cssVendor, copyImages, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, watchFiles);
 
 // PRODUCTION
-exports.production = series(cleanDist, compileSCSS, copyFont, copyImages, compileHTML, concatScripts, minifyScripts, minifyCss, renameSources, prettyHTML, generateDocs, browserSyncInit);
+exports.production = series(cleanDist, compileSCSS, copyFont, copyImages, compileHTML, concatScripts, minifyScripts, minifyCSS, renameSources, prettyHTML, generateDocs, browserSyncInit);
 
 // RUN ALL LINTERS
 exports.lint = series(htmlLint, scssLint, jsLint);
