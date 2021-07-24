@@ -55,6 +55,7 @@
     "run-sequence": "^2.2.1"
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
     "popper.js": "^1.14.7"

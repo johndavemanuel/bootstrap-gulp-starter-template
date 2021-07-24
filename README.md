@@ -57,6 +57,11 @@ To use this template, your computer needs:
 - `.sass-lint.yml` - handles the SCSS lint rules
 - `reports` - txt generated file for accessibility issues
 
+### Includes:
+- [Fontawesome 5](https://fontawesome.com/)
+- [Animate CSS](https://animate.style/)
+- [RTL Support](https://github.com/tysonmatanich/directional-scss)
+
 ### Gulp Plugins:
 - [gulp-accessibility](https://www.npmjs.com/package/gulp-accessibility)
 - [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer)

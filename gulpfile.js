@@ -110,7 +110,7 @@ function jsVendor() {
 // COPY CSS VENDOR FILES
 function cssVendor() {
   log(chalk.red.bold('---------------COPY CSS VENDOR FILES INTO DIST---------------'));
-  return src("[]", {"allowEmpty": true})
+  return src(['node_modules/animate.css/animate.css'])
     .pipe(dest('dist/assets/vendor/css'))
     .pipe(browserSync.stream());
 }
