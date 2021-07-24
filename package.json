@@ -1,8 +1,8 @@
 {
   "name": "bootstrap-gulp-starter-template",
   "version": "1.4.0",
-  "description": "a bootstrap boiler plate with sass, concatenation, minification, autoprefixer, sourcemaps, browser-sync, git and gulp task runner",
-  "main": "index.js",
+  "description": "a bootstrap boilerplate with sass, concatenation, minification, autoprefixer, sourcemaps, browser-sync, git and gulp task runner",
+  "main": "gulpfile.js",
   "scripts": {
     "development": "gulp development",
     "production": "gulp production",
@@ -54,8 +54,8 @@
     "chalk": "^4.0.0"
   },
   "dependencies": {
-    "bootstrap": "^4.5.0",
-    "jquery": "^3.3.1",
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.6.1",
     "popper.js": "^1.14.7"
   }
 }
