@@ -1,6 +1,5 @@
 "use strict";
 
-
 $(document).ready(function() {
   $('body').autoPadding({
     source: $('.js-header'),

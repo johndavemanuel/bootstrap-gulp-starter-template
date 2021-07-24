@@ -44,19 +44,11 @@ const files = {
 
 // ------------ DEVELOPMENT TASKS -------------
 
-// COMPILE SCSS INTO CSS
-function compileSCSS() {
-  log(chalk.red.bold('---------------COMPILING SCSS---------------'));
-  return src(['src/assets/scss/main.scss', 'src/assets/scss/rtl.scss'])
-    .pipe(sass({
-      outputStyle: 'expanded',
-      sourceComments: 'map',
-      sourceMap: 'scss',
-      includePaths: bourbon
-    }).on('error', sass.logError))
-    .pipe(autoprefixer('last 2 versions'))
-    .pipe(dest('dist/assets/css'))
-    .pipe(browserSync.stream());
+// RESET PANINI'S CACHE OF LAYOUTS AND PARTIALS
+function resetPages(done) {
+  log(chalk.red.bold('---------------CLEARING PANINI CACHE---------------'));
+  panini.refresh();
+  done();
 }
 
 // USING PANINI, TEMPLATE, PAGE AND PARTIAL FILES ARE COMBINED TO FORM HTML MARKUP
@@ -79,7 +71,7 @@ function compileHTML() {
     .pipe(browserSync.stream());
 }
 
-// COPY CUSTOM JS
+// COPY AND TRANSPILE CUSTOM JS
 function compileJS() {
   log(chalk.red.bold('---------------COMPILE CUSTOM.JS---------------'));
   return src(['src/assets/js/**/*.js'])
@@ -88,11 +80,39 @@ function compileJS() {
     .pipe(browserSync.stream());
 }
 
-// RESET PANINI'S CACHE OF LAYOUTS AND PARTIALS
-function resetPages(done) {
-  log(chalk.red.bold('---------------CLEARING PANINI CACHE---------------'));
-  panini.refresh();
-  done();
+// COMPILE SCSS INTO CSS
+function compileSCSS() {
+  log(chalk.red.bold('---------------COMPILING SCSS---------------'));
+  return src(['src/assets/scss/main.scss', 'src/assets/scss/rtl.scss'])
+    .pipe(sass({
+      outputStyle: 'expanded',
+      sourceComments: 'map',
+      sourceMap: 'scss',
+      includePaths: bourbon
+    }).on('error', sass.logError))
+    .pipe(autoprefixer('last 2 versions'))
+    .pipe(dest('dist/assets/css'))
+    .pipe(browserSync.stream());
+}
+
+// COPY JS VENDOR FILES
+function jsVendor() {
+  log(chalk.red.bold('---------------COPY JAVASCRIPT VENDOR FILES INTO DIST---------------'));
+  return src([
+      'node_modules/jquery/dist/jquery.js',
+      'node_modules/popper.js/dist/umd/popper.js',
+      'node_modules/bootstrap/dist/js/bootstrap.js',
+    ])
+    .pipe(dest('dist/assets/vendor/js'))
+    .pipe(browserSync.stream());
+}
+
+// COPY CSS VENDOR FILES
+function cssVendor() {
+  log(chalk.red.bold('---------------COPY CSS VENDOR FILES INTO DIST---------------'));
+  return src("[]", {"allowEmpty": true})
+    .pipe(dest('dist/assets/vendor/css'))
+    .pipe(browserSync.stream());
 }
 
 // SCSS LINT
@@ -139,7 +159,6 @@ function watchFiles() {
   watch('src/assets/img/**/*', copyImages);
 }
 
-
 // BROWSER SYNC
 function browserSyncInit(done) {
   log(chalk.red.bold('---------------BROWSER SYNC INIT---------------'));
@@ -178,26 +197,6 @@ function copyFont() {
       'src/assets/font/*',
     ])
     .pipe(dest('dist/assets/fonts'))
-    .pipe(browserSync.stream());
-}
-
-// COPY JS VENDOR FILES
-function jsVendor() {
-  log(chalk.red.bold('---------------COPY JAVASCRIPT VENDOR FILES INTO DIST---------------'));
-  return src([
-      'src/assets/vendor/js/*',
-    ])
-    .pipe(dest('dist/assets/vendor/js'))
-    .pipe(browserSync.stream());
-}
-
-// COPY CSS VENDOR FILES
-function cssVendor() {
-  log(chalk.red.bold('---------------COPY CSS VENDOR FILES INTO DIST---------------'));
-  return src([
-      'src/assets/vendor/css/*',
-    ])
-    .pipe(dest('dist/assets/vendor/css'))
     .pipe(browserSync.stream());
 }
 
@@ -263,11 +262,10 @@ function renameSources() {
 function concatScripts() {
   log(chalk.red.bold('---------------CONCATINATE SCRIPTS---------------'));
   return src([
-      'src/assets/vendor/js/jquery.js',
-      'src/assets/vendor/js/popper.js',
-      'src/assets/vendor/js/bootstrap.js',
-      'src/assets/js/util/autoPadding.js',
-      'src/assets/js/util/crossPlatform.js',
+      'dist/assets/vendor/js/jquery.js',
+      'dist/assets/vendor/js/popper.js',
+      'dist/assets/vendor/js/bootstrap.js',
+      'src/assets/js/util/*',
       'src/assets/js/*'
     ])
     .pipe(sourcemaps.init())
@@ -303,11 +301,11 @@ function purgeCSS() {
 }
 
 
-// MINIFY CSS
+// MINIFY AND CONCAT CSS
 function minifyCSS() {
   log(chalk.red.bold('---------------MINIFY CSS---------------'));
   return src([
-      'src/assets/vendor/css/**/*',
+      'dist/assets/vendor/css/**/*',
       'dist/assets/css/main.css'
     ])
     .pipe(sourcemaps.init())
@@ -319,10 +317,10 @@ function minifyCSS() {
 }
 
 // DEVELOPMENT
-exports.development = series(cleanDist, copyFont, jsVendor, cssVendor, copyImages, compileHTML, compileJS, resetPages, prettyHTML, compileSCSS, browserSyncInit, watchFiles);
+exports.development = series(cleanDist, copyFont, copyImages, compileHTML, compileSCSS, cssVendor, jsVendor, compileJS, resetPages, prettyHTML,  browserSyncInit, watchFiles);
 
 // PRODUCTION
-exports.production = series(cleanDist, compileSCSS, copyFont, copyImages, compileHTML, concatScripts, minifyScripts, minifyCSS, renameSources, prettyHTML, generateDocs, browserSyncInit);
+exports.production = series(cleanDist, copyFont, copyImages, compileHTML, compileSCSS, cssVendor, purgeCSS, minifyCSS, jsVendor, concatScripts, minifyScripts, renameSources, prettyHTML, generateDocs, browserSyncInit);
 
 // RUN ALL LINTERS
 exports.lint = series(htmlLint, scssLint, jsLint);
