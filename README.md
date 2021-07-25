@@ -15,7 +15,7 @@ The `dist` folder is not kept in source control.
 
 The template is built with Sass and Gulp build system with these features:
 
--	Handlebars HTML templates with Panini– Panini is a super simple flat file generator for use with Gulp. It compiles a series of HTML pages using a common layout. These pages can also include HTML partials, external Handlebars helpers, or external data as JSON or YAML.
+-	Handlebars HTML templates with Panini – a super simple flat file generator for use with Gulp. It compiles a series of HTML pages using a common layout. These pages can also include HTML partials, external Handlebars helpers, or external data as JSON or YAML.
 -	Sass compilation, prefixing with autoprefixer, and javaScript concatenation
 -	Built-in BrowserSync server - will automatically reload your page when files are changed. It also live-injects CSS changes when you save a Sass file. This task runs continuously and defaults to localhost.
 -	For production builds - CSS compression, JavaScript compression, Image compression and more.
@@ -84,8 +84,6 @@ To use this template, your computer needs:
 - [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps)
 - [gulp-uglify](https://www.npmjs.com/package/gulp-uglify)
 - [gulp-babel](https://www.npmjs.com/package/gulp-babel)
-- [run-sequence](https://www.npmjs.com/package/run-sequence)
-
 
 ### Additional Resources:
 - [Sass: Syntactically Awesome Style Sheets](http://sass-lang.com/)
