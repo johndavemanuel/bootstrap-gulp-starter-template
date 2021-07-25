@@ -48,7 +48,7 @@
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
-    "gulp-uglify-es": "^1.0.4",
+    "gulp-uglify-es": "^2.0.0",
     "jshint": "^2.10.1",
     "node-bourbon": "^4.2.8",
     "panini": "^1.6.3"
