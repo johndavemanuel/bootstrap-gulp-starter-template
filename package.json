@@ -46,7 +46,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-sass-lint": "^1.4.0",
-    "gulp-sourcemaps": "^2.6.1",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.0",
     "gulp-uglify-es": "^1.0.4",
     "jshint": "^2.10.1",
