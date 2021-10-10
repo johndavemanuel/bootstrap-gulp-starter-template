@@ -4,10 +4,34 @@ title: Home
 ---
 <section class="mt-4 mb-5">
   <div class="container mb-4">
-    <h1 class="font-weight-bold title text-center mb-5 animate__animated animate__bounce animate__faster">BOOTSTRAP GULP STARTER TEMPLATE</h1>
+    <h1 class="font-weight-bold title text-center mb-5 animate__animated animate__bounce animate__faster">BOOTSTRAP GULP
+      STARTER TEMPLATE</h1>
     <div class="jumbotron">
       <h3 class="display-4">{{ data.title }} <i class="fas fa-smile-beam"></i></h3>
       <p class="lead">{{ data.description }}</p>
+    </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
